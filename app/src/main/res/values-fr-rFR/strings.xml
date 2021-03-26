@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello_blank_fragment">Bonjour fragment vide</string>
+    <string name="alarm">Alarme</string>
+    <string name="calendar">Calendrier</string>
+    <string name="home">Acceuil</string>
+</resources>
