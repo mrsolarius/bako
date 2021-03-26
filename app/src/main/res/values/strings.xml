@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">bako</string>
+    <string name="app_name" translatable="false">bako</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="alarm">Alarm</string>
+    <string name="calendar">Calendar</string>
+    <string name="home">Home</string>
 </resources>
