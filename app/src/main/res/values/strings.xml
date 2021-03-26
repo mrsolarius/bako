@@ -5,4 +5,9 @@
     <string name="alarm">Alarm</string>
     <string name="calendar">Calendar</string>
     <string name="home">Home</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="planing">Planing</string>
+    <string name="week">Week</string>
+    <string name="month">Month</string>
 </resources>
