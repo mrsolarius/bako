@@ -4,4 +4,6 @@
     <string name="alarm">Alarme</string>
     <string name="calendar">Calendrier</string>
     <string name="home">Acceuil</string>
+    <string name="themeTitle">Theme light/sombre</string>
+    <string name="themeKey">theme</string>
 </resources>
