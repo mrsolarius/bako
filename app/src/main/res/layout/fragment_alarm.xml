@@ -6,13 +6,125 @@
     android:layout_height="match_parent"
     tools:context=".view.navigation.fragment.AlarmFragment" >
 
-    <TextView
-        android:id="@+id/text"
+    <ImageButton
+        android:id="@+id/imageButtonTravelTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/alarm"
+        android:layout_marginTop="16dp"
+        android:src="@android:drawable/ic_menu_edit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textViewTravelTimeTitle"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTimeTravel" />
+
+    <TextView
+        android:id="@+id/textViewTravelTimeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="140dp"
+        android:text="TextView"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTimeTotal"
+        tools:layout_editor_absoluteX="253dp" />
+
+    <Switch
+        android:id="@+id/switchPreparation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="132dp"
+        android:layout_marginEnd="100dp"
+        android:text="Réveil de préparation"
+        app:layout_constraintBottom_toTopOf="@+id/switchTravel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonPreparationTime" />
+
+    <Switch
+        android:id="@+id/switchTravel"
+        android:layout_width="wrap_content"
+        android:layout_height="27dp"
+        android:layout_marginStart="163dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="100dp"
+        android:text="Réveil de départ"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switchPreparation" />
+
+    <TextView
+        android:id="@+id/textViewPreparationTimeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="136dp"
+        android:layout_marginEnd="120dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/textViewTravelTimeTitle"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTimeTotal" />
+
+    <EditText
+        android:id="@+id/editTextTimeTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="101dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="101dp"
+        android:ems="10"
+        android:inputType="time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNextWakeUp" />
+
+    <EditText
+        android:id="@+id/editTextTimePreparation"
+        android:layout_width="68dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:inputType="time"
+        app:layout_constraintBottom_toTopOf="@+id/imageButtonPreparationTime"
+        app:layout_constraintEnd_toStartOf="@+id/imageButtonPreparationTime"
+        app:layout_constraintHorizontal_bias="0.834"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPreparationTimeTitle"
+        app:layout_constraintVertical_bias="0.473" />
+
+    <EditText
+        android:id="@+id/editTextTimeTravel"
+        android:layout_width="68dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:inputType="time"
+        app:layout_constraintBottom_toTopOf="@+id/imageButtonTravelTime"
+        app:layout_constraintEnd_toStartOf="@+id/imageButtonTravelTime"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/imageButtonPreparationTime"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTravelTimeTitle"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageButton
+        android:id="@+id/imageButtonPreparationTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="136dp"
+        android:src="@android:drawable/ic_menu_edit"
+        app:layout_constraintEnd_toStartOf="@+id/imageButtonTravelTime"
+        tools:layout_editor_absoluteY="326dp" />
+
+    <TextView
+        android:id="@+id/textViewNextWakeUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="177dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="177dp"
+        android:layout_marginBottom="10dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTimeTotal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
