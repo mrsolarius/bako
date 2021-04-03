@@ -5,7 +5,9 @@ import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import app.bako.model.herit.AssignmentCode
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity(tableName = "dayoffcode")
 class DayOffCode(
     @PrimaryKey(autoGenerate = false) val code: String?,
