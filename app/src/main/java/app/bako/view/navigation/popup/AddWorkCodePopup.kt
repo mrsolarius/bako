@@ -118,35 +118,36 @@ class AddWorkCodePopup() : Fragment() {
 
     private fun setButtonAddOrUpdate() {
         validateEdition.setOnClickListener{
-            val newWorkCode = editTextCode.text
-            val newHeureDebut = strToHour(editHeureDebut.text.toString())
-            val newHeureFin = strToHour(editHeureFin.text.toString())
-            val newColor = colorPicker.text
 
-            // If workCode is null
+            if(isCorrect()) {
+                val newWorkCode = editTextCode.text.toString()
+                val newHeureDebut = strToHour(editHeureDebut.text.toString())
+                val newHeureFin = strToHour(editHeureFin.text.toString())
+                val newColor = colorPicker.text
 
-            if(workCode == null){
-                workCode = newHeureDebut?.let { it1 ->
-                    newHeureFin?.let { it2 ->
-                        WorkCode(
-                            newWorkCode as String?, newColor as String?,
-                            it1, it2
-                        )
+                if (workCode == null) {
+                    workCode = newHeureDebut?.let { it1 ->
+                        newHeureFin?.let { it2 ->
+                            WorkCode(
+                                newWorkCode as String?, newColor as String?,
+                                it1, it2
+                            )
+                        }
+                    }
+
+                } else {
+                    workCode!!.code = newWorkCode.toString()
+                    workCode!!.color = newColor.toString()
+                    if (newHeureDebut != null) {
+                        workCode!!.startHour = newHeureDebut
+                    }
+                    if (newHeureFin != null) {
+                        workCode!!.endHour = newHeureFin
                     }
                 }
 
-            }else{
-                workCode!!.code = newWorkCode.toString()
-                workCode!!.color = newColor.toString()
-                if (newHeureDebut != null) {
-                    workCode!!.startHour = newHeureDebut
-                }
-                if (newHeureFin != null) {
-                    workCode!!.endHour = newHeureFin
-                }
+                goToCodesListFragment()
             }
-
-            goToCodesListFragment()
         }
     }
 
