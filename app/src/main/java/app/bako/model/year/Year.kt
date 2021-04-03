@@ -1,4 +1,6 @@
-package app.bako.model
+package app.bako.model.year
+
+import app.bako.model.workingday.WorkingDay
 
 class Year(totalWorkingHour:Float) {
 

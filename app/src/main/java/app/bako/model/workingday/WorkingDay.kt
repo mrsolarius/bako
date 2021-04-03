@@ -1,5 +1,7 @@
-package app.bako.model
+package app.bako.model.workingday
 
+import app.bako.model.herit.AssignmentCode
+import app.bako.model.realworking.RealWorking
 import java.util.*
 
 class WorkingDay(var date: Date) {
