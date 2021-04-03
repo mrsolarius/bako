@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 30
@@ -46,4 +47,9 @@ dependencies {
     implementation "androidx.preference:preference:1.1.1"
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.github.QuadFlask:colorpicker:0.0.15'
+
+    def room_version = "2.2.6"
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
 }
