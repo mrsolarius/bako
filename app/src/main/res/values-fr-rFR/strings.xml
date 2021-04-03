@@ -6,4 +6,16 @@
     <string name="home">Acceuil</string>
     <string name="themeTitle">Theme light/sombre</string>
     <string name="themeKey">theme</string>
+    <string name="pipe">|</string>
+    <string name="code_d_affectation">Code d\'affectation</string>
+    <string name="heure_de_d_but_de_travail">Heure de début de travail</string>
+    <string name="heure_de_fin_de_travail">Heure de fin de travail</string>
+    <string name="couleur">Couleur</string>
+    <string name="ajouteroumodifier">AjouterOuModifier</string>
+    <string name="line_2">Line 2</string>
+    <string name="editworkcode">EditWorkCode</string>
+    <string name="line_3">line 3</string>
+    <string name="definition_des_codes_de_travail">Définition des codes de travail</string>
+    <string name="definition_des_codes_de_conges">Définition des codes de congès</string>
+    <string name="returntolistworkcodemanager">returnToListWorkCodeManager</string>
 </resources>

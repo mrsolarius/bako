@@ -1,7 +1,6 @@
 package app.bako.view.navigation.fragment
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,16 +21,6 @@ import java.lang.reflect.Type
 import java.util.*
 import kotlin.collections.ArrayList
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [CodesListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class CodesListFragment : Fragment() {
     //Button of page
     private var addWorkCode:Button? = null
@@ -74,7 +63,7 @@ class CodesListFragment : Fragment() {
     private fun setAddButton() {
         addWorkCode!!.setOnClickListener{
             val activityObject: MainActivity = activity as MainActivity
-            activityObject.makeCurrentFragment(CodesListFragment())
+            activityObject.makeCurrentFragment(AddWorkCodePopup())
         }
     }
 
@@ -99,7 +88,7 @@ class CodesListFragment : Fragment() {
         val sharedpreference = context?.getSharedPreferences("shared preferences",
             AppCompatActivity.MODE_PRIVATE
         )
-        val gson: Gson = Gson()
+        val gson = Gson()
         val json: String? = sharedpreference?.getString("workCodeSharedPreference", null)
         val type: Type = TypeToken.getParameterized(ArrayList::class.java, WorkCode::class.java).type
         workCodeList = gson.fromJson(json, type)
@@ -107,25 +96,5 @@ class CodesListFragment : Fragment() {
         if(workCodeList == null){
             workCodeList = ArrayList()
         }
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CodesListFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CodesListFragment().apply {
-                arguments = Bundle().apply {
-//                    putString(ARG_PARAM1, param1)
-//                    putString(ARG_PARAM2, param2)
-                }
-            }
     }
 }

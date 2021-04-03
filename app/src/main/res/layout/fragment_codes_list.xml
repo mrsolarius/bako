@@ -14,7 +14,7 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Définition des codes de travail"
+            android:text="@string/definition_des_codes_de_travail"
             app:layout_constraintBottom_toTopOf="@+id/list_WorkCode"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -46,9 +46,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:text="Définition des codes de congès"
+            android:text="@string/definition_des_codes_de_conges"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/list_WorkCode" />
+
+        <Button
+            android:id="@+id/addDayOffCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/plus"
+            app:layout_constraintEnd_toEndOf="@+id/list_DayOffCode"
+            app:layout_constraintTop_toBottomOf="@+id/list_DayOffCode" />
+
+        <Button
+            android:id="@+id/addWorkCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/plus"
+            app:layout_constraintEnd_toEndOf="@+id/list_WorkCode"
             app:layout_constraintTop_toBottomOf="@+id/list_WorkCode" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
