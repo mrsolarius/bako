@@ -3,12 +3,15 @@ package app.bako.view.navigation
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Button
 import android.widget.Toast
+import android.widget.Toolbar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.fragment.app.Fragment
 import app.bako.R
 import app.bako.view.navigation.fragment.AlarmFragment
 import app.bako.view.navigation.fragment.CalendarFragment
+import app.bako.view.navigation.fragment.CodesListFragment
 import app.bako.view.navigation.fragment.HomeFragment
 import kotlinx.android.synthetic.main.main_activity.*
 import kotlin.concurrent.thread
@@ -20,6 +23,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
+
+//        val toolbar = findViewById<Toolbar>(R.id.)
 
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
@@ -49,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun makeCurrentFragment(fragment: Fragment){
+    fun makeCurrentFragment(fragment: Fragment){
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fl_wrapper, fragment)
             commit()

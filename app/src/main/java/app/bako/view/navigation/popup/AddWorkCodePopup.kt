@@ -12,8 +12,10 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import app.bako.R
-import app.bako.model.WorkCode
+import app.bako.model.workcode.WorkCode
+import app.bako.model.workcode.WorkCodeViewModel
 import app.bako.view.navigation.MainActivity
 import app.bako.view.navigation.fragment.CodesListFragment
 import com.flask.colorpicker.ColorPickerView
@@ -123,21 +125,26 @@ class AddWorkCodePopup() : Fragment() {
                 val newWorkCode = editTextCode.text.toString()
                 val newHeureDebut = strToHour(editHeureDebut.text.toString())
                 val newHeureFin = strToHour(editHeureFin.text.toString())
-                val newColor = colorPicker.text
+                val viewColor = colorPicker.background as ColorDrawable
+                val newColor = viewColor.color
 
                 if (workCode == null) {
                     workCode = newHeureDebut?.let { it1 ->
                         newHeureFin?.let { it2 ->
                             WorkCode(
-                                newWorkCode as String?, newColor as String?,
+                                newWorkCode as String, newColor,
                                 it1, it2
                             )
                         }
                     }
 
+                    //sauvegarde de l'objet
+                    val mWorkCodeViewModel = ViewModelProvider(this).get(WorkCodeViewModel::class.java)
+                    mWorkCodeViewModel.addWorkCode(workCode!!)
+
                 } else {
                     workCode!!.code = newWorkCode.toString()
-                    workCode!!.color = newColor.toString()
+                    workCode!!.color = newColor
                     if (newHeureDebut != null) {
                         workCode!!.startHour = newHeureDebut
                     }

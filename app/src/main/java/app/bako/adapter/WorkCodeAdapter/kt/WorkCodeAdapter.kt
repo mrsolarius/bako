@@ -9,17 +9,17 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import app.bako.R
-import app.bako.model.WorkCode
+import app.bako.model.workcode.WorkCode
 import app.bako.view.navigation.MainActivity
 import app.bako.view.navigation.popup.AddWorkCodePopup
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.parcel.Parcelize
 import java.text.SimpleDateFormat
 import java.util.*
 
-class WorkCodeAdapter(context: Context, workCodeList: ArrayList<WorkCode>) :
+class WorkCodeAdapter(var context: Context) :
     RecyclerView.Adapter<WorkCodeAdapter.ExampleViewHolder>() {
-    private val workCodeList: ArrayList<WorkCode>
-    private val context: Context
+    private var workCodeList: List<WorkCode> = emptyList<WorkCode>()
 
     class ExampleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var codeAffectation: TextView
@@ -72,8 +72,9 @@ class WorkCodeAdapter(context: Context, workCodeList: ArrayList<WorkCode>) :
         return workCodeList.size
     }
 
-    init {
-        this.context = context
-        this.workCodeList = workCodeList
+    fun setData(workCode: List<WorkCode>) {
+        this.workCodeList = workCode
+        notifyDataSetChanged()
+//        notifyItemRangeInserted(0, workCodeList.size)
     }
 }
