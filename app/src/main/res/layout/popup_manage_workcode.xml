@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
         android:id="@+id/textView"
+        android:labelFor="@+id/editTextCodeAffectationTravail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:text="Code d'affectation"
+        android:text="@string/code_d_affectation"
         app:layout_constraintStart_toStartOf="@+id/heureDebutTravailLabel"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,16 +20,16 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/heureDebutTravailLabel"
+        android:labelFor="@+id/editTextHeureDebutTravail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Heure de début de travail"
+        android:text="@string/heure_de_d_but_de_travail"
         app:layout_constraintStart_toStartOf="@+id/heureFinTravailLabel"
         app:layout_constraintTop_toBottomOf="@+id/editTextCodeAffectationTravail" />
 
@@ -39,16 +39,16 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="time"
-        android:text="Name"
         app:layout_constraintStart_toStartOf="@+id/heureDebutTravailLabel"
         app:layout_constraintTop_toBottomOf="@+id/heureDebutTravailLabel" />
 
     <TextView
         android:id="@+id/heureFinTravailLabel"
+        android:labelFor="@+id/editTextHeureFinTravail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Heure de fin de travail"
+        android:text="@string/heure_de_fin_de_travail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.062"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,20 +56,21 @@
 
     <EditText
         android:id="@+id/editTextHeureFinTravail"
+        android:labelFor="@+id/heureFinTravailLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="time"
-        android:text="Name"
         app:layout_constraintStart_toStartOf="@+id/heureFinTravailLabel"
         app:layout_constraintTop_toBottomOf="@+id/heureFinTravailLabel" />
 
     <TextView
         android:id="@+id/colorPickerLabel"
+        android:labelFor="@+id/addOrUpdateCodeTravail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="Couleur"
+        android:text="@string/couleur"
         app:layout_constraintStart_toStartOf="@+id/editTextHeureFinTravail"
         app:layout_constraintTop_toBottomOf="@+id/editTextHeureFinTravail" />
 
@@ -78,7 +79,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
-        android:text="AjouterOuModifier"
+        android:text="@string/ajouteroumodifier"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/colorPickerWorkCode" />
 
@@ -98,6 +99,8 @@
         android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/settings" />
+        app:srcCompat="@mipmap/settings"
+        android:focusable="true"
+        android:contentDescription="@string/returntolistworkcodemanager" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
