@@ -4,8 +4,29 @@
     <string name="alarm">Alarme</string>
     <string name="calendar">Calendrier</string>
     <string name="home">Acceuil</string>
+    <string name="open">Ouvert</string>
+    <string name="close">Fermer</string>
+    <string name="planing">Planing</string>
+    <string name="week">Semaines</string>
+    <string name="month">Mois</string>
     <string name="themeTitle">Theme light/sombre</string>
     <string name="themeKey">theme</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="pipe">|</string>
     <string name="code_d_affectation">Code d\'affectation</string>
     <string name="heure_de_d_but_de_travail">Heure de début de travail</string>

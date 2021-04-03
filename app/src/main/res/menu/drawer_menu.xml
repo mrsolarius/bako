@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/calendar_planing"
+        android:icon="@drawable/ic_calendar_planing"
+        android:title="@string/planing" />
+
+    <item
+        android:id="@+id/calendar_week"
+        android:icon="@drawable/ic_calendar_hebdo"
+        android:title="@string/week" />
+
+    <item
+        android:id="@+id/calendar_month"
+        android:icon="@drawable/ic_calendar_mensu"
+        android:title="@string/month" />
+
+</menu>
