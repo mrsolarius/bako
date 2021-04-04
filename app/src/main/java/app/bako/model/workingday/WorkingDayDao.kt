@@ -34,4 +34,12 @@ interface WorkingDayDao {
     @Query("SELECT * FROM workingday WHERE date = :date")
     suspend fun getWorkCodeForWorkDay(date: Date): List<WorkingDayWithWorkCodes>
 
+    @Transaction
+    @Query("SELECT * FROM workingday")
+    suspend fun getAllWorkingDayWithWorkCode(): List<WorkingDayWithWorkCodes>
+
+    @Transaction
+    @Query("SELECT * FROM workingday  WHERE date BETWEEN :first and :last")
+    suspend fun getAllWorkingDayWithWorkCodeBetween(first: Date, last: Date): List<WorkingDayWithWorkCodes>
+
 }
