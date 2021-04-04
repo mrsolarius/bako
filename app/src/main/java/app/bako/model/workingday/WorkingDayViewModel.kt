@@ -55,4 +55,10 @@ class WorkingDayViewModel(application: Application): AndroidViewModel(applicatio
             repository.getBetween(before, after)
         }
     }
+
+    fun getWorkCodeForWorkDay(date: Date){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.getWorkCodeForWorkDay(date)
+        }
+    }
 }
