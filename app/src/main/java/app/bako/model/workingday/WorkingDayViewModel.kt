@@ -61,4 +61,16 @@ class WorkingDayViewModel(application: Application): AndroidViewModel(applicatio
             repository.getWorkCodeForWorkDay(date)
         }
     }
+
+    fun getAllWorkingDayWithWorkCode(){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.getAllWorkingDayWithWorkCode()
+        }
+    }
+
+    fun getAllWorkingDayWithWorkCodeBetween(before: Date, after: Date){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.getAllWorkingDayWithWorkCodeBetween(before, after)
+        }
+    }
 }
