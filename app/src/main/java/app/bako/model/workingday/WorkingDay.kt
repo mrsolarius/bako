@@ -1,25 +1,16 @@
 package app.bako.model.workingday
 
-import app.bako.model.herit.AssignmentCode
-import app.bako.model.realworking.RealWorking
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.Relation
+import app.bako.model.workcode.WorkCode
 import java.util.*
 
-class WorkingDay(var date: Date) {
-
-    lateinit var assignmentCode: AssignmentCode
-    lateinit var realWorking: RealWorking
-
-    constructor(date: Date, realWorking: RealWorking) : this(date){
-        this.realWorking = realWorking
-    }
-
-    constructor(date: Date, assignmentCode: AssignmentCode) : this(date){
-        this.assignmentCode = assignmentCode
-    }
-
-    constructor(date: Date, realWorking: RealWorking, assignmentCode: AssignmentCode) : this(date){
-        this.date = date
-        this.realWorking = realWorking
-        this.assignmentCode = assignmentCode
-    }
+@Entity(tableName = "workingday")
+data class WorkingDay(
+        @PrimaryKey var date: Date
+        ) {
+    @Embedded lateinit var prevWorkCode: WorkCode
+    @Embedded lateinit var realWorking: WorkCode
 }

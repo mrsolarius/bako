@@ -1,16 +1,11 @@
 package app.bako.model.year
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import app.bako.model.workingday.WorkingDay
 
-class Year(totalWorkingHour:Float) {
-
-    lateinit var workingDay: WorkingDay
-
-    constructor(totalWorkingHour: Float, workingDay: WorkingDay) : this(totalWorkingHour){
-        this.workingDay = workingDay;
-    }
-
-    fun fetch(year:Int){
-        //@Todo
-    }
-}
+@Entity(tableName = "year")
+data class Year(
+        @PrimaryKey val yearLabel: Int,
+        val totalWorkingHour: Float
+)
