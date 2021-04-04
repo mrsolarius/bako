@@ -2,8 +2,8 @@ package app.bako.model.year
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import app.bako.model.workingday.WorkingDay
 
+@Dao
 interface YearDao {
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun addYear(year: Year)

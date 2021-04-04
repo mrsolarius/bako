@@ -31,4 +31,8 @@ class WorkingDayRepository(private val workingDayDao: WorkingDayDao) {
         workingDayDao.getBetween(before, after)
     }
 
+    suspend fun getWorkCodeForWorkDay(date: Date){
+        workingDayDao.getWorkCodeForWorkDay(date)
+    }
+
 }

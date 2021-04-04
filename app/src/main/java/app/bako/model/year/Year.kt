@@ -6,6 +6,6 @@ import app.bako.model.workingday.WorkingDay
 
 @Entity(tableName = "year")
 data class Year(
-        @PrimaryKey val yearLabel: Int,
+        @PrimaryKey(autoGenerate = false) val yearLabel: Int,
         val totalWorkingHour: Float
 )

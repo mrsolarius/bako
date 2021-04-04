@@ -2,8 +2,11 @@ package app.bako.model.workingday
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import app.bako.model.relation.WorkingDayWithWorkCodes
+import app.bako.model.workcode.WorkCode
 import java.util.*
 
+@Dao
 interface WorkingDayDao {
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
@@ -21,9 +24,14 @@ interface WorkingDayDao {
     @Query("SELECT * FROM workingday ORDER BY date ASC")
     fun readAllData(): LiveData<List<WorkingDay>>
 
-    @Query("SELECT * FROM workingday WHERE YEAR(date) = :year")
+    @Query("SELECT * FROM workingday WHERE strftime('%Y', date) = :year")
     fun getByDate(year: Int): LiveData<List<WorkingDay>>
 
     @Query("SELECT * FROM workingday WHERE date BETWEEN :first and :last")
     fun getBetween(first: Date, last: Date): LiveData<List<WorkingDay>>
+
+    @Transaction
+    @Query("SELECT * FROM workingday WHERE date = :date")
+    suspend fun getWorkCodeForWorkDay(date: Date): List<WorkingDayWithWorkCodes>
+
 }

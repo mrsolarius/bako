@@ -9,8 +9,8 @@ import java.util.*
 
 @Entity(tableName = "workingday")
 data class WorkingDay(
-        @PrimaryKey var date: Date
+        @PrimaryKey(autoGenerate = false) var date: Date
         ) {
-    @Embedded lateinit var prevWorkCode: WorkCode
-    @Embedded lateinit var realWorking: WorkCode
+    lateinit var prevWorkCode: String
+    lateinit var realWorking: String
 }

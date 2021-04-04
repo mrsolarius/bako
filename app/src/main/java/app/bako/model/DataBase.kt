@@ -9,10 +9,12 @@ import app.bako.model.dayoffcode.DayOffCode
 import app.bako.model.dayoffcode.DayOffCodeDao
 import app.bako.model.workcode.WorkCode
 import app.bako.model.workcode.WorkCodeDao
+import app.bako.model.workingday.WorkingDay
 import app.bako.model.workingday.WorkingDayDao
+import app.bako.model.year.Year
 import app.bako.model.year.YearDao
 
-@Database(entities = [WorkCode::class, DayOffCode::class], version = 1, exportSchema = false)
+@Database(entities = [WorkCode::class, DayOffCode::class, WorkingDay::class, Year::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class DataBase: RoomDatabase() {
 
