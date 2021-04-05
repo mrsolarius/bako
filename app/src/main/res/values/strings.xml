@@ -41,4 +41,16 @@
     <string name="definition_des_codes_de_conges">Définition des codes de congès</string>
     <string name="plus" translatable="false">+</string>
     <string name="returntolistworkcodemanager">returnToListWorkCodeManager</string>
+    <string name="labelDiffPrevisionnelReel">
+        Différence\nPrévisionnel/Réel
+    </string>
+    <string name="labelCompteEpargneTemps">
+        Compte\népargne temps
+    </string>
+    <string name="hour" translatable="false">H</string>
+    <string name="previewDiffPrevisionnelReel" translatable="false">43</string>
+    <string name="previewValueCompteEpargneTemps" translatable="false">23</string>
+    <string name="labelGraphNbHeureDansAnnee">Nombre d\'heure dans l\'année</string>
+    <string name="labelDateProchainConges">Date du prochain jour de congé</string>
+    <string name="previewProchainConge">24/05/2000</string>
 </resources>

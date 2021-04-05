@@ -39,4 +39,13 @@
     <string name="definition_des_codes_de_travail">Définition des codes de travail</string>
     <string name="definition_des_codes_de_conges">Définition des codes de congès</string>
     <string name="returntolistworkcodemanager">returnToListWorkCodeManager</string>
+    <string name="labelDiffPrevisionnelReel">
+        Différence\nPrévisionnel/Réel
+    </string>
+    <string name="labelCompteEpargneTemps">
+        Compte\népargne temps
+    </string>
+    <string name="labelGraphNbHeureDansAnnee">Nombre d\'heure dans l\'année</string>
+    <string name="labelDateProchainConges">Date du prochain jour de congé</string>
+    <string name="previewProchainConge">24/05/2000</string>
 </resources>
