@@ -24,4 +24,12 @@
         tools:layout_editor_absoluteX="261dp"
         tools:layout_editor_absoluteY="61dp"
         tools:ignore="MissingConstraints" />
+
+    <FrameLayout
+        android:id="@+id/managerWorkCodeOfCalendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

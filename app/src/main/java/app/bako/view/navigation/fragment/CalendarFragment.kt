@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import app.bako.R
 import app.bako.view.navigation.MainActivity
 
@@ -26,6 +28,12 @@ class CalendarFragment : Fragment() {
             val activityObject: MainActivity = activity as MainActivity
             activityObject.makeCurrentFragment(CodesListFragment())
         }
+
+
+        val ft: FragmentTransaction = activity?.supportFragmentManager!!.beginTransaction()
+
+        ft.replace(R.id.managerWorkCodeOfCalendar, ManagerWorkCodeOfCalendarFragment())
+        ft.commit()
 
         return view
 
