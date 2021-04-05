@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!-- "Mark Favorite", should appear as action button if possible -->
+    <item
+        android:id="@+id/setConfig"
+        android:title="@string/setting_codeAffectation"
+        android:icon="@drawable/settings"
+        app:showAsAction="ifRoom"
+        />
+    <item
+        android:id="@+id/setCodeAffectations"
+        android:title="@string/setting_codeAffectation"
+        app:showAsAction=""
+        app:actionViewClass="androidx.appcompat.widget.AppCompatButton"
+        />
+    <item
+        android:id="@+id/setOtherSettings"
+        android:title="@string/setting_autreParam"
+        app:showAsAction="never"
+        />
+</menu>

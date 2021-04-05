@@ -21,12 +21,6 @@ class CalendarFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_calendar, container, false)
 
-        val bouton: Button = view.findViewById<Button>(R.id.openCodeManagement)
-        bouton.setOnClickListener{
-            val activityObject: MainActivity = activity as MainActivity
-            activityObject.makeCurrentFragment(CodesListFragment())
-        }
-
         return view
 
     }
