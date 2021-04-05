@@ -7,6 +7,10 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
+
     lintOptions {
         abortOnError false
     }
@@ -47,6 +51,7 @@ dependencies {
     implementation "androidx.preference:preference:1.1.1"
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.github.QuadFlask:colorpicker:0.0.15'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
     def room_version = "2.2.6"
     implementation "androidx.room:room-runtime:$room_version"
