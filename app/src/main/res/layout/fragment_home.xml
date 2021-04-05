@@ -28,6 +28,7 @@
 
         <TextView
             android:id="@+id/labelDifferencePrevisionnelEtReel"
+            android:labelFor="@+id/valueDiffPrevisionnelReel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/labelDiffPrevisionnelReel"
@@ -78,6 +79,7 @@
 
         <TextView
             android:id="@+id/labelCompteEpargneTemps"
+            android:labelFor="@+id/valueCompteEpargneTemps"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/labelCompteEpargneTemps"
@@ -132,6 +134,7 @@
 
         <TextView
             android:id="@+id/labelNbHeureAnnee"
+            android:labelFor="@id/chartNbHeureAnnee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/labelGraphNbHeureDansAnnee"
@@ -176,7 +179,8 @@
         app:layout_constraintVertical_bias="0.084">
 
         <TextView
-            android:id="@+id/labelDateProchainConges"
+            android:id="@+id/labelDateProchainConge"
+            android:labelFor="@+id/valueProchainConge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/labelDateProchainConges"
@@ -185,17 +189,17 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
-            android:id="@+id/dividerForDateProchainConges"
+            android:id="@+id/dividerForDateProchainConge"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="10dp"
             android:background="?android:attr/listDivider"
-            app:layout_constraintEnd_toEndOf="@+id/labelDateProchainConges"
-            app:layout_constraintStart_toStartOf="@+id/labelDateProchainConges"
-            app:layout_constraintTop_toBottomOf="@+id/labelDateProchainConges" />
+            app:layout_constraintEnd_toEndOf="@+id/labelDateProchainConge"
+            app:layout_constraintStart_toStartOf="@+id/labelDateProchainConge"
+            app:layout_constraintTop_toBottomOf="@+id/labelDateProchainConge" />
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/valueProchainConge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/default_margin_top"
@@ -203,7 +207,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dividerForDateProchainConges" />
+            app:layout_constraintTop_toBottomOf="@+id/dividerForDateProchainConge" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
