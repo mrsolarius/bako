@@ -39,4 +39,11 @@
     <string name="definition_des_codes_de_travail">Définition des codes de travail</string>
     <string name="definition_des_codes_de_conges">Définition des codes de congès</string>
     <string name="returntolistworkcodemanager">returnToListWorkCodeManager</string>
+    <string name="settings">Paramètres</string>
+    <string name="nb_hours_supp">Nombre d\'heure supplémentaire</string>
+    <string name="nb_hours_annual">Nombre d\'heure annuel</string>
+    <string name="edit_work_code">Editer les codes de travail</string>
+    <string name="edit_vacation_code">Editer les codes de conger</string>
+    <string name="edit_codes">Configuration des codes</string>
+    <string name="pr">Pré</string>
 </resources>

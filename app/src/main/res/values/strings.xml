@@ -27,7 +27,8 @@
     <string name="attachment_title" translatable="false">Download incoming attachments</string>
     <string name="attachment_summary_on" translatable="false">Automatically download attachments for incoming emails
     </string>
-    <string name="attachment_summary_off" translatable="false">Only download attachments when manually requested</string>
+    <string name="attachment_summary_off" translatable="false">Only download attachments when manually requested
+    </string>
     <string name="pipe">|</string>
     <string name="code_d_affectation">Code d\'affectation</string>
     <string name="heure_de_d_but_de_travail">Heure de début de travail</string>
@@ -41,4 +42,12 @@
     <string name="definition_des_codes_de_conges">Définition des codes de congès</string>
     <string name="plus" translatable="false">+</string>
     <string name="returntolistworkcodemanager">returnToListWorkCodeManager</string>
+    <string name="settings">Settings</string>
+    <string name="nb_hours_supp">Annual extra hours</string>
+    <string name="nb_hours_annual">Annual hours</string>
+    <string name="edit_work_code">Edit work codes</string>
+    <string name="edit_vacation_code">Edit vacation codes</string>
+    <string name="edit_codes">Codes Settings</string>
+    <string name="pr">Pré</string>
+    <string name="re">Ré</string>
 </resources>
