@@ -6,13 +6,213 @@
     android:layout_height="match_parent"
     tools:context=".view.navigation.fragment.HomeFragment">
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/home"
-        app:layout_constraintBottom_toBottomOf="parent"
+<!--    <com.github.mikephil.charting.charts.LineChart-->
+<!--        android:id="@+id/textView4"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        tools:layout_editor_absoluteX="107dp"-->
+<!--        tools:layout_editor_absoluteY="168dp"-->
+<!--        tools:ignore="MissingConstraints" />-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/vueDifférencePrevisionnelEtReel"
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="210dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/labelDifferencePrevisionnelEtReel"
+            android:labelFor="@+id/valueDiffPrevisionnelReel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/labelDiffPrevisionnelReel"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintTop_toBottomOf="@+id/labelDifferencePrevisionnelEtReel" />
+
+        <TextView
+            android:id="@+id/valueDiffPrevisionnelReel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/previewDiffPrevisionnelReel"
+            android:textSize="@dimen/default_margin_top"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+        <TextView
+            android:id="@+id/extentionDifferencePrevisionnelReel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hour"
+            app:layout_constraintBottom_toBottomOf="@+id/valueDiffPrevisionnelReel"
+            app:layout_constraintStart_toEndOf="@+id/valueDiffPrevisionnelReel" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/compteEpargneTemps"
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:layout_marginStart="210dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/labelCompteEpargneTemps"
+            android:labelFor="@+id/valueCompteEpargneTemps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/labelCompteEpargneTemps"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/separatorCompteEpargneTemps"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintTop_toBottomOf="@+id/labelCompteEpargneTemps" />
+
+        <TextView
+            android:id="@+id/valueCompteEpargneTemps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/previewValueCompteEpargneTemps"
+            android:textSize="@dimen/default_margin_top"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/separatorCompteEpargneTemps" />
+
+        <TextView
+            android:id="@+id/extentionCompteEpargneTemps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hour"
+            app:layout_constraintBottom_toBottomOf="@+id/valueCompteEpargneTemps"
+            app:layout_constraintStart_toEndOf="@+id/valueCompteEpargneTemps" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/nbHeureAnneeGraph"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="200dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vueDifférencePrevisionnelEtReel"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/labelNbHeureAnnee"
+            android:labelFor="@id/chartNbHeureAnnee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/labelGraphNbHeureDansAnnee"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/labelNbHeureAnnee" />
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chartNbHeureAnnee"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider2" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/nbHeureAnneeGraph"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/nbHeureAnneeGraph"
+        app:layout_constraintTop_toBottomOf="@+id/nbHeureAnneeGraph"
+        app:layout_constraintVertical_bias="0.084">
+
+        <TextView
+            android:id="@+id/labelDateProchainConge"
+            android:labelFor="@+id/valueProchainConge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/labelDateProchainConges"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/dividerForDateProchainConge"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintEnd_toEndOf="@+id/labelDateProchainConge"
+            app:layout_constraintStart_toStartOf="@+id/labelDateProchainConge"
+            app:layout_constraintTop_toBottomOf="@+id/labelDateProchainConge" />
+
+        <TextView
+            android:id="@+id/valueProchainConge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/default_margin_top"
+            android:text="@string/previewProchainConge"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dividerForDateProchainConge" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--<com.github.mikephil.charting.charts.LineChart
+
+/>-->
+
