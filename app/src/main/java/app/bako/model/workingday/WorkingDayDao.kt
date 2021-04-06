@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import app.bako.model.relation.WorkingDayWithWorkCodes
 import app.bako.model.workcode.WorkCode
+import kotlinx.coroutines.flow.Flow
 import java.util.*
 
 @Dao
@@ -32,14 +33,14 @@ interface WorkingDayDao {
 
     @Transaction
     @Query("SELECT * FROM workingday WHERE date = :date")
-    suspend fun getWorkCodeForWorkDay(date: Date): LiveData<List<WorkingDayWithWorkCodes>>
+    fun getWorkCodeForWorkDay(date: Date): Flow<List<WorkingDayWithWorkCodes>>
 
     @Transaction
     @Query("SELECT * FROM workingday")
-    suspend fun getAllWorkingDayWithWorkCode(): LiveData<List<WorkingDayWithWorkCodes>>
+    fun getAllWorkingDayWithWorkCode(): Flow<List<WorkingDayWithWorkCodes>>
 
     @Transaction
     @Query("SELECT * FROM workingday  WHERE date BETWEEN :first and :last")
-    suspend fun getAllWorkingDayWithWorkCodeBetween(first: Date, last: Date): LiveData<List<WorkingDayWithWorkCodes>>
+    fun getAllWorkingDayWithWorkCodeBetween(first: Date, last: Date): Flow<List<WorkingDayWithWorkCodes>>
 
 }
