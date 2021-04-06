@@ -22,7 +22,7 @@ class AddCodeToPlanning : AppCompatActivity() {
         val mWorkCodeViewModel = ViewModelProvider(this).get(WorkCodeViewModel::class.java)
         val spinner = findViewById<View>(R.id.spinnerSelectCodeForAdd) as Spinner
 
-        mWorkCodeViewModel.listWorkCode.observe(this, { data ->
+        mWorkCodeViewModel.getCodeList().observe(this, { data ->
             data.let {
                 val spinnerAdapter =
                     ArrayAdapter(this, android.R.layout.simple_spinner_item, data)

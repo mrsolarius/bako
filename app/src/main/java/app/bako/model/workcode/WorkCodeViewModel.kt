@@ -3,6 +3,7 @@ package app.bako.model.workcode
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import app.bako.model.DataBase
 import kotlinx.coroutines.Dispatchers
@@ -11,14 +12,12 @@ import kotlinx.coroutines.launch
 class WorkCodeViewModel(application: Application): AndroidViewModel(application) {
 
     val readAllData: LiveData<List<WorkCode>>
-    val listWorkCode: LiveData<List<String>>
     private val repository: WorkCodeRepository
 
     init {
         val workCodeDao = DataBase.getDatabase(application).WorkCodeDao()
         repository = WorkCodeRepository(workCodeDao)
         readAllData = repository.readAllData
-        listWorkCode = repository.listWorkCode
     }
 
     fun addWorkCode(workCode: WorkCode){
@@ -45,9 +44,7 @@ class WorkCodeViewModel(application: Application): AndroidViewModel(application)
         }
     }
 
-    fun getCodeList() {
-        viewModelScope.launch(Dispatchers.IO){
-            return@launch repository.getCodeList()
-        }
+    fun getCodeList(): LiveData<List<String>> {
+            return repository.getCodeList().asLiveData()
     }
 }

@@ -1,11 +1,11 @@
 package app.bako.model.workcode
 
 import androidx.lifecycle.LiveData
+import kotlinx.coroutines.flow.Flow
 
 class WorkCodeRepository(private val workCodeDao: WorkCodeDao) {
 
     val readAllData: LiveData<List<WorkCode>> = workCodeDao.readAllData()
-    val listWorkCode: LiveData<List<String>> = workCodeDao.getCodeList()
 
     suspend fun addWorkCode(workCode: WorkCode){
         workCodeDao.addWorkCode(workCode)
@@ -23,8 +23,8 @@ class WorkCodeRepository(private val workCodeDao: WorkCodeDao) {
         workCodeDao.deleteAllWorkCode()
     }
 
-    suspend fun getCodeList(){
-        workCodeDao.getCodeList()
+    fun getCodeList(): Flow<List<String>> {
+        return workCodeDao.getCodeList()
     }
 
 }

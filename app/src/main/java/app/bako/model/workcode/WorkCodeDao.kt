@@ -2,6 +2,7 @@ package app.bako.model.workcode
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface WorkCodeDao {
@@ -22,5 +23,5 @@ interface WorkCodeDao {
     fun readAllData(): LiveData<List<WorkCode>>
 
     @Query("SELECT code FROM workcode")
-    fun getCodeList(): LiveData<List<String>>
+    fun getCodeList(): Flow<List<String>>
 }
