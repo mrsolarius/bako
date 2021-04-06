@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import app.bako.R
@@ -26,7 +27,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class AddWorkCodePopup() : Fragment() {
+class AddWorkCodePopup() : DialogFragment() {
     private var workCode: WorkCode? = null
 
     private lateinit var editTextCode: TextView
