@@ -7,10 +7,6 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
-    repositories {
-        maven { url 'https://jitpack.io' }
-    }
-
     lintOptions {
         abortOnError false
     }
