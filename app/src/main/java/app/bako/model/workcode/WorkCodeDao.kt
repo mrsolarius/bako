@@ -20,4 +20,7 @@ interface WorkCodeDao {
 
     @Query("SELECT * FROM workcode ORDER BY code ASC")
     fun readAllData(): LiveData<List<WorkCode>>
+
+    @Query("SELECT code FROM workcode")
+    fun getCodeList(): LiveData<List<String>>
 }

@@ -1,5 +1,6 @@
 package app.bako.view.navigation.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import app.bako.R
+import app.bako.view.navigation.AddCodeToPlanning
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ManagerWorkCodeOfCalendarFragment : Fragment(){
@@ -33,6 +35,11 @@ class ManagerWorkCodeOfCalendarFragment : Fragment(){
             }else{
                 openMenu()
             }
+        }
+
+        addCodeToPlanning.setOnClickListener{
+            val intent: Intent = Intent(context, AddCodeToPlanning::class.java)
+            startActivity(intent)
         }
 
         return view

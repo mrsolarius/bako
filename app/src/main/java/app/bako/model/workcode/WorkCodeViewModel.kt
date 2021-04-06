@@ -11,12 +11,14 @@ import kotlinx.coroutines.launch
 class WorkCodeViewModel(application: Application): AndroidViewModel(application) {
 
     val readAllData: LiveData<List<WorkCode>>
+    val listWorkCode: LiveData<List<String>>
     private val repository: WorkCodeRepository
 
     init {
         val workCodeDao = DataBase.getDatabase(application).WorkCodeDao()
         repository = WorkCodeRepository(workCodeDao)
         readAllData = repository.readAllData
+        listWorkCode = repository.listWorkCode
     }
 
     fun addWorkCode(workCode: WorkCode){
@@ -40,6 +42,12 @@ class WorkCodeViewModel(application: Application): AndroidViewModel(application)
     fun deleteAllWorkCode(){
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteAllWorkCode()
+        }
+    }
+
+    fun getCodeList() {
+        viewModelScope.launch(Dispatchers.IO){
+            return@launch repository.getCodeList()
         }
     }
 }
