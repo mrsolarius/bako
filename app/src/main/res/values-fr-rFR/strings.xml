@@ -48,4 +48,11 @@
     <string name="labelGraphNbHeureDansAnnee">Nombre d\'heure dans l\'année</string>
     <string name="labelDateProchainConges">Date du prochain jour de congé</string>
     <string name="previewProchainConge">24/05/2000</string>
+    <string name="settings">Paramètres</string>
+    <string name="nb_hours_supp">Nombre d\'heure supplémentaire</string>
+    <string name="nb_hours_annual">Nombre d\'heure annuel</string>
+    <string name="edit_work_code">Editer les codes de travail</string>
+    <string name="edit_vacation_code">Editer les codes de conger</string>
+    <string name="edit_codes">Configuration des codes</string>
+    <string name="pr">Pré</string>
 </resources>

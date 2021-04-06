@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.navigation.fragment.CalendarFragment">
+    tools:context=".view.navigation.fragment.calendar.CalendarFragment">
 
+<<<<<<< HEAD
     <TextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
@@ -32,4 +33,15 @@
         android:layout_marginBottom="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+=======
+    <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:id="@+id/calendarRecyclerView"/>
+>>>>>>> BAKO-46 : Mise en place planning
 </androidx.constraintlayout.widget.ConstraintLayout>
