@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,7 +22,7 @@ import app.bako.view.navigation.popup.AddWorkCodePopup
 import java.util.*
 import kotlin.collections.ArrayList
 
-class CodesListFragment : Fragment() {
+class CodesListFragment : DialogFragment() {
     //Button of page
     private var addWorkCode:Button? = null
     private var addDayOffCode:Button? = null
@@ -60,8 +62,9 @@ class CodesListFragment : Fragment() {
 
     private fun setAddButton() {
         addWorkCode!!.setOnClickListener{
-            val activityObject: MainActivity = activity as MainActivity
-            activityObject.makeCurrentFragment(AddWorkCodePopup())
+            val fm: FragmentManager = this.parentFragmentManager
+            val editNameDialogFragment: AddWorkCodePopup = AddWorkCodePopup()
+            editNameDialogFragment.show(fm, "fragment_edit_name")
         }
     }
     private fun buildWorkCodeRecyclerView(view: View) {

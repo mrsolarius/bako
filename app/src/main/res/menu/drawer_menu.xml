@@ -16,4 +16,9 @@
         android:icon="@drawable/ic_calendar_mensu"
         android:title="@string/month" />
 
+    <item
+            android:id="@+id/settings"
+            android:icon="@drawable/ic_baseline_settings_24"
+            android:title="@string/settings" />
+
 </menu>
