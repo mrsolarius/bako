@@ -3,8 +3,10 @@ package app.bako.model.workingday
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import app.bako.model.DataBase
+import app.bako.model.relation.WorkingDayWithWorkCodes
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
@@ -56,21 +58,15 @@ class WorkingDayViewModel(application: Application): AndroidViewModel(applicatio
         }
     }
 
-    fun getWorkCodeForWorkDay(date: Date){
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.getWorkCodeForWorkDay(date)
-        }
+    fun getWorkCodeForWorkDay(date: Date): LiveData<List<WorkingDayWithWorkCodes>> {
+        return repository.getWorkCodeForWorkDay(date).asLiveData()
     }
 
-    fun getAllWorkingDayWithWorkCode(){
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.getAllWorkingDayWithWorkCode()
-        }
+    fun getAllWorkingDayWithWorkCode(): LiveData<List<WorkingDayWithWorkCodes>> {
+        return repository.getAllWorkingDayWithWorkCode().asLiveData()
     }
 
-    fun getAllWorkingDayWithWorkCodeBetween(before: Date, after: Date){
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.getAllWorkingDayWithWorkCodeBetween(before, after)
-        }
+    fun getAllWorkingDayWithWorkCodeBetween(before: Date, after: Date): LiveData<List<WorkingDayWithWorkCodes>> {
+        return repository.getAllWorkingDayWithWorkCodeBetween(before, after).asLiveData()
     }
 }

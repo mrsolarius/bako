@@ -20,21 +20,17 @@ class AddCodeToPlanning : AppCompatActivity() {
 
     fun setValueOfSpinner(){
         val mWorkCodeViewModel = ViewModelProvider(this).get(WorkCodeViewModel::class.java)
-
         val spinner = findViewById<View>(R.id.spinnerSelectCodeForAdd) as Spinner
 
-        var myList: List<String> = emptyList()
-
-        mWorkCodeViewModel.listWorkCode.observe(this, androidx.lifecycle.Observer{
-            t ->
-            myList = t
+        mWorkCodeViewModel.listWorkCode.observe(this, { data ->
+            data.let {
+                val spinnerAdapter =
+                    ArrayAdapter(this, android.R.layout.simple_spinner_item, data)
+                spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                spinner.adapter = spinnerAdapter
+                spinnerAdapter.addAll();
+                spinnerAdapter.notifyDataSetChanged();
+            }
         })
-        val spinnerAdapter =
-            ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, myList)
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner.adapter = spinnerAdapter
-
-        spinnerAdapter.addAll();
-        spinnerAdapter.notifyDataSetChanged();
     }
 }

@@ -14,7 +14,7 @@ import app.bako.model.workingday.WorkingDayDao
 import app.bako.model.year.Year
 import app.bako.model.year.YearDao
 
-@Database(entities = [WorkCode::class, DayOffCode::class, WorkingDay::class, Year::class], version = 1, exportSchema = false)
+@Database(entities = [WorkCode::class, DayOffCode::class, WorkingDay::class, Year::class], version = 2, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class DataBase: RoomDatabase() {
 
@@ -37,7 +37,7 @@ abstract class DataBase: RoomDatabase() {
                     context.applicationContext,
                     DataBase::class.java,
                     "bako_db"
-                ).build()
+                ).fallbackToDestructiveMigration().build()
                 INSTANCE = instance
                 return instance
             }

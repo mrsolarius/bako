@@ -1,6 +1,8 @@
 package app.bako.model.workingday
 
 import androidx.lifecycle.LiveData
+import app.bako.model.relation.WorkingDayWithWorkCodes
+import kotlinx.coroutines.flow.Flow
 import java.util.*
 
 class WorkingDayRepository(private val workingDayDao: WorkingDayDao) {
@@ -31,16 +33,16 @@ class WorkingDayRepository(private val workingDayDao: WorkingDayDao) {
         workingDayDao.getBetween(before, after)
     }
 
-    suspend fun getWorkCodeForWorkDay(date: Date){
-        workingDayDao.getWorkCodeForWorkDay(date)
+    fun getWorkCodeForWorkDay(date: Date): Flow<List<WorkingDayWithWorkCodes>> {
+        return workingDayDao.getWorkCodeForWorkDay(date)
     }
 
-    suspend fun getAllWorkingDayWithWorkCode(){
-        workingDayDao.getAllWorkingDayWithWorkCode()
+    fun getAllWorkingDayWithWorkCode(): Flow<List<WorkingDayWithWorkCodes>> {
+        return workingDayDao.getAllWorkingDayWithWorkCode()
     }
 
-    suspend fun getAllWorkingDayWithWorkCodeBetween(before: Date, after: Date){
-        workingDayDao.getAllWorkingDayWithWorkCodeBetween(before, after)
+    fun getAllWorkingDayWithWorkCodeBetween(before: Date, after: Date): Flow<List<WorkingDayWithWorkCodes>> {
+        return workingDayDao.getAllWorkingDayWithWorkCodeBetween(before, after)
     }
 
 }
