@@ -1,6 +1,7 @@
 package app.bako.view.navigation
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Spinner
@@ -14,8 +15,14 @@ class AddCodeToPlanning : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_code_to_planning)
-
         setValueOfSpinner()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        //Go back arrow btn
+        finish();
+        return true;
     }
 
     fun setValueOfSpinner(){

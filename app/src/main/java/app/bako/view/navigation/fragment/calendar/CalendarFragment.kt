@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +15,7 @@ import app.bako.model.workingday.WorkingDay
 import app.bako.model.workingday.WorkingDayDao
 import app.bako.model.workingday.WorkingDayRepository
 import app.bako.model.workingday.WorkingDayViewModel
+import app.bako.view.navigation.fragment.ManagerWorkCodeOfCalendarFragment
 import kotlinx.android.synthetic.main.fragment_calendar.view.*
 
 /**
@@ -25,16 +27,10 @@ class CalendarFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        /*val bouton: Button = view.findViewById<Button>(R.id.openCodeManagement)
-        bouton.setOnClickListener{
-            val activityObject: MainActivity = activity as MainActivity
-            activityObject.makeCurrentFragment(CodesListFragment())
-        }
-        */
+        /*
+         * SETUP RECYCLER VIEW AND LOAD DATA
+         */
         val view = inflater.inflate(R.layout.fragment_calendar, container, false)
-
-
         val adapter = CalendarRecyclerAdapter()
         val recyclerView = view.calendarRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -46,6 +42,13 @@ class CalendarFragment : Fragment() {
             }
         })
         recyclerView.adapter = adapter
+
+        /*
+         * SETUP FRAGMENT FAB BUTTON
+         */
+        val ft: FragmentTransaction = activity?.supportFragmentManager!!.beginTransaction()
+        ft.replace(R.id.managerWorkCodeOfCalendar, ManagerWorkCodeOfCalendarFragment())
+        ft.commit()
         return view
     }
 }

@@ -15,4 +15,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:id="@+id/calendarRecyclerView"/>
+
+    <FrameLayout
+            android:id="@+id/managerWorkCodeOfCalendar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="60dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -46,14 +46,14 @@ class ManagerWorkCodeOfCalendarFragment : Fragment(){
     }
 
     private fun openMenu() {
-        openOrCloseManager.setImageResource(android.R.drawable.ic_menu_close_clear_cancel)
+        openOrCloseManager.setImageResource(R.drawable.ic_baseline_close_24)
         addCodeToPlanning.visibility = View.VISIBLE
         updateCodeOfPlanning.visibility = View.VISIBLE
         isOpen = true
     }
 
     private fun closeMenu() {
-        openOrCloseManager.setImageResource(android.R.drawable.ic_menu_add)
+        openOrCloseManager.setImageResource(R.drawable.ic_baseline_add_24)
         addCodeToPlanning.visibility = View.INVISIBLE
         updateCodeOfPlanning.visibility = View.INVISIBLE
         isOpen = false
