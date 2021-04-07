@@ -8,10 +8,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Spinner
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import app.bako.R
@@ -19,16 +16,21 @@ import app.bako.model.workcode.WorkCodeViewModel
 import app.bako.model.workingday.WorkingDay
 import app.bako.model.workingday.WorkingDayViewModel
 import kotlinx.android.synthetic.main.activity_add_code_to_planning.*
+import kotlinx.android.synthetic.main.popup_manage_workcode.*
 import java.text.SimpleDateFormat
 import java.util.*
 
 
+@SuppressLint("UseSwitchCompatOrMaterialCode")
 class AddCodeToPlanning : AppCompatActivity() {
 
     var myCalendar: Calendar = Calendar.getInstance();
     lateinit var choixJournee:EditText
-    lateinit var spinnerCodeAffectation:Spinner;
-    lateinit var confirmAddCodeToPlanning:Button;
+    lateinit var spinnerCodeAffectation:Spinner
+    lateinit var confirmAddCodeToPlanning:Button
+    lateinit var previsionnelOrReel: Switch
+    var workingDay : WorkingDay? = null
+
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +45,7 @@ class AddCodeToPlanning : AppCompatActivity() {
             myCalendar.set(Calendar.YEAR, year)
             myCalendar.set(Calendar.MONTH, monthOfYear)
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-            updateText()
+            updateTextAndSetCurrentWorkingDay()
         }
 
         editTextJournee.setOnTouchListener { view, motionEvent ->
@@ -55,21 +57,46 @@ class AddCodeToPlanning : AppCompatActivity() {
         }
 
         onValidate();
-
+//
+//        confirmAddCodeToPlanning.setOnClickListener{
+//            var test = workingDay
+//            print("")
+//        }
     }
 
     private fun getViewElements() {
         choixJournee = findViewById<EditText>(R.id.editTextJournee);
         spinnerCodeAffectation = findViewById<View>(R.id.spinnerSelectCodeForAdd) as Spinner
+        previsionnelOrReel = findViewById(R.id.previsionnelOrReel)
         confirmAddCodeToPlanning = findViewById(R.id.confirmAddCodeToPlanning)
     }
 
-    private fun updateText() {
+    @SuppressLint("SetTextI18n")
+    private fun updateTextAndSetCurrentWorkingDay() {
         val myFormat = "dd/MM/yyyy" //In which you need put here
 
         val sdf = SimpleDateFormat(myFormat, Locale.FRANCE)
 
-        editTextJournee.setText(sdf.format(myCalendar.time))
+        val value = myCalendar.time
+
+        val dateStringSelected = sdf.format(value)
+
+        val dateSelected = sdf.parse(dateStringSelected)
+
+        editTextJournee.setText(dateStringSelected)
+
+        val mWorkingDayViewModel = ViewModelProvider(this).get(WorkingDayViewModel::class.java)
+        mWorkingDayViewModel.getWorkCodeForWorkDay(dateSelected!!).observe(this, { data ->
+            data.let {
+                if(data.isNotEmpty()){
+                    workingDay = data[0].workingDay
+                    confirmAddCodeToPlanning.text = "Mettre à jour"
+                }else{
+                    workingDay = null
+                    confirmAddCodeToPlanning.text = "Ajouter"
+                }
+            }
+        })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -86,13 +113,25 @@ class AddCodeToPlanning : AppCompatActivity() {
 
             val workCodeSelected = spinnerCodeAffectation.selectedItem.toString()
 
-            val workingDay = WorkingDay(date)
-            workingDay.prevWorkCode = workCodeSelected
-            workingDay.realWorking = workCodeSelected
+            var mustCreate = false
+
+            if(workingDay == null) {
+                workingDay = WorkingDay(date)
+                mustCreate = true
+            }
+
+            workingDay!!.prevWorkCode = workCodeSelected
+            workingDay!!.realWorking = workCodeSelected
 
             //sauvegarde de l'objet
             val mWorkCodeViewModel = ViewModelProvider(this).get(WorkingDayViewModel::class.java)
-            mWorkCodeViewModel.addWorkCode(workingDay)
+
+            if(mustCreate) {
+                mWorkCodeViewModel.addWorkCode(workingDay!!)
+            }else{
+                mWorkCodeViewModel.updateWorkCode(workingDay!!)
+            }
+
             finish()
         }
     }
