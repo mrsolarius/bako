@@ -12,5 +12,5 @@ data class WorkingDay(
         @PrimaryKey(autoGenerate = false) var date: Date
         ) {
     lateinit var prevWorkCode: String
-    lateinit var realWorking: String
+    var realWorking: String? = null
 }
