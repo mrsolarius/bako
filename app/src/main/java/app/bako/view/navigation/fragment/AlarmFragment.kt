@@ -20,6 +20,7 @@ import kotlinx.android.synthetic.main.fragment_alarm.*
  */
 class AlarmFragment : Fragment() {
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -27,29 +28,30 @@ class AlarmFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_alarm, container, false)
 
+        // Activation d'un TimePicker quand on appuie sur l'image bouton du temps de préparation
         val button: ImageButton = view.findViewById<View>(R.id.imageButtonPreparationTime) as ImageButton
-        button.setOnClickListener(object : View.OnClickListener {
-            @RequiresApi(Build.VERSION_CODES.N)
-            override fun onClick(v: View?) {
-                if (v != null) {
-                    clickTimePicker(v, true)
-                }
+        button.setOnClickListener { v ->
+            if (v != null) {
+                clickTimePicker(v, true)
             }
-        })
+        }
 
+        // Activation d'un TimePicker quand on appuie sur l'image bouton du temps de trajet
         val button2: ImageButton = view.findViewById<View>(R.id.imageButtonTravelTime) as ImageButton
-        button2.setOnClickListener(object : View.OnClickListener {
-            @RequiresApi(Build.VERSION_CODES.N)
-            override fun onClick(v: View?) {
-                if (v != null) {
-                    clickTimePicker(v, false)
-                }
+        button2.setOnClickListener { v ->
+            if (v != null) {
+                clickTimePicker(v, false)
             }
-        })
+        }
 
         return view
     }
 
+    /**
+     * TimePicker pour choisir les temps de préparation et de trajet
+     * @param view: View actuelle
+     * @param whichButton: Boolean qui permet de choisir si on set le temps de trajet ou celui de préparation
+     */
     @RequiresApi(Build.VERSION_CODES.N)
     fun clickTimePicker(view: View, whichButton: Boolean) {
         val c = Calendar.getInstance()
