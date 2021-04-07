@@ -11,6 +11,6 @@ import java.util.*
 data class WorkingDay(
         @PrimaryKey(autoGenerate = false) var date: Date
         ) {
-    lateinit var prevWorkCode: String
+    var prevWorkCode: String? = null
     var realWorking: String? = null
 }

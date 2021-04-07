@@ -88,7 +88,7 @@ class AddCodeToPlanning : AppCompatActivity() {
 
             val workingDay = WorkingDay(date)
             workingDay.prevWorkCode = workCodeSelected
-            workingDay.realWorking = "-1"
+            workingDay.realWorking = workCodeSelected
 
             //sauvegarde de l'objet
             val mWorkCodeViewModel = ViewModelProvider(this).get(WorkingDayViewModel::class.java)
