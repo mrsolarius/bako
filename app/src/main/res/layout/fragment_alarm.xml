@@ -9,14 +9,14 @@
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:background="@drawable/layout_bg_deep_gray"
+            android:layout_height="wrap_content" android:background="?attr/containerBorder"
             android:padding="10dp" android:layout_margin="30dp">
         <TextView
                 android:id="@+id/textViewNextWakeUp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Prochain réveil"
-                android:textAlignment="center" android:textColor="#FFFFFF"/>
+                android:textAlignment="center"/>
         <EditText
                 android:id="@+id/editTextTimeTotal"
                 android:layout_width="wrap_content"
@@ -36,14 +36,13 @@
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="150dp"
-                android:layout_height="150dp" android:background="@drawable/layout_bg_deep_gray"
+                android:layout_height="150dp" android:background="?containerBorder"
                 android:layout_marginStart="40dp" android:padding="10dp">
             <TextView
                     android:id="@+id/textViewPreparationTimeTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Temps de préparation"
-                    android:textColor="#F7F7F7"
                     android:textAlignment="center"/>
             <EditText
                     android:id="@+id/editTextTimePreparation"
@@ -56,7 +55,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_baseline_edit_24"
-                    android:background="@drawable/layout_bg_green"
+                    android:background="@drawable/layout_bg_color_accent"
                     android:padding="10dp"
                     android:layout_gravity="right"/>
         </LinearLayout>
@@ -66,14 +65,13 @@
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="150dp"
-                android:layout_height="150dp" android:background="@drawable/layout_bg_deep_gray"
+                android:layout_height="150dp" android:background="?attr/containerBorder"
                 android:layout_marginEnd="40dp" android:padding="10dp">
             <TextView
                     android:id="@+id/textViewTravelTimeTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Temps\nde trajet"
-                    android:textColor="#F7F7F7"
                     android:textAlignment="center"/>
             <EditText
                     android:id="@+id/editTextTimeTravel"
@@ -86,7 +84,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_baseline_edit_24"
-                    android:background="@drawable/layout_bg_green"
+                    android:background="@drawable/layout_bg_color_accent"
                     android:padding="10dp"
                     android:layout_gravity="right"/>
         </LinearLayout>
@@ -95,21 +93,19 @@
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:background="@drawable/layout_bg_deep_gray"
+            android:layout_height="wrap_content" android:background="?attr/containerBorder"
             android:padding="30dp" android:layout_marginTop="60dp" android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp">
         <Switch
                 android:id="@+id/switchPreparation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Réveil de préparation"
-                android:textColor="#FFFFFF"/>
+                android:text="Réveil de préparation"/>
         <Switch
                 android:id="@+id/switchTravel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Réveil de départ"
-                android:textColor="#FFFFFF"/>
+                android:text="Réveil de départ"/>
     </LinearLayout>
 
 </LinearLayout>

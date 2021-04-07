@@ -61,4 +61,5 @@
     <string name="edit_codes">Codes Settings</string>
     <string name="pr">Pré</string>
     <string name="re">Ré</string>
+    <string name="medical_planning">Gestion de planning medical</string>
 </resources>

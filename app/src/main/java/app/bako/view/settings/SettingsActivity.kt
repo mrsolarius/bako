@@ -1,9 +1,12 @@
 package app.bako.view.settings
 
+import android.app.Application
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceFragmentCompat
 import app.bako.R
 import androidx.core.app.NavUtils
@@ -25,6 +28,7 @@ class SettingsActivity : AppCompatActivity() {
             .replace(R.id.settings, SettingsFragment())
             .commit()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -43,6 +47,7 @@ class SettingsActivity : AppCompatActivity() {
     class SettingsFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey)
+
         }
 
         override fun onPreferenceTreeClick(preference: Preference?): Boolean {
@@ -50,6 +55,14 @@ class SettingsActivity : AppCompatActivity() {
             if (key.equals("startWorkCode")){
                 showSettingDialog()
             }
+
+            if (key.equals("themeSwitch")){
+                when (preference?.isEnabled ){
+                    true -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    false -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                }
+            }
+
             return super.onPreferenceTreeClick(preference)
         }
 

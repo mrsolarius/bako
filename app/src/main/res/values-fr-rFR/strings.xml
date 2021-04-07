@@ -55,4 +55,5 @@
     <string name="edit_vacation_code">Editer les codes de conger</string>
     <string name="edit_codes">Configuration des codes</string>
     <string name="pr">Pré</string>
+    <string name="medical_planning">Gestion de planning medical</string>
 </resources>

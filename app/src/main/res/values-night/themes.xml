@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Bako" parent="Theme.MaterialComponents">
+        <item name="colorPrimary">@color/colorDarkPrimary</item>
+        <item name="colorPrimaryDark">@color/colorDarkPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccentDark</item>
+        <item name="android:textColorPrimary">@color/textColor</item>
+        <item name="android:windowBackground">@color/black</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="colorBackgroundFloating">@color/colorDarkPrimary</item>
+        <item name="android:colorBackgroundFloating">@color/colorDarkPrimary</item>
+        <item name="colorLeftMenu">@color/textColor</item>
+        <item name="containerBorder">@drawable/layout_bg_deep_gray</item>
+        <item name="android:navigationBarColor">@color/black</item>
+    </style>
+</resources>
