@@ -2,10 +2,11 @@ package app.bako.view.navigation.fragment
 
 import android.annotation.SuppressLint
 import android.app.TimePickerDialog
+import android.content.Context
+import android.content.SharedPreferences
 import android.icu.util.Calendar
 import android.os.Build
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,8 +23,12 @@ import kotlinx.android.synthetic.main.fragment_alarm.*
  */
 class AlarmFragment : Fragment() {
 
-    private var Fhours = 0
-    private var Fminutes = 0
+    private var wakeUpTime = 8*60 + 0 // heure supposée de début de travail en minutes
+    private var preparationTime = 0
+    private var travelTime = 0
+    private var totalTime = 0
+
+    private lateinit var sharedPref: SharedPreferences
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(
@@ -32,6 +37,14 @@ class AlarmFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_alarm, container, false)
+
+        // Creation de ma sharedPreference
+        sharedPref = requireActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
+
+        // On recupère les valeurs des sharedPreferences si elles existent sinon on set les valeurs à 0
+        preparationTime = sharedPref.getInt("preparationTime", 0)
+        travelTime = sharedPref.getInt("travelTime", 0)
+        totalTime = sharedPref.getInt("totalTime", 0)
 
         // Activation d'un TimePicker quand on appuie sur l'image bouton du temps de préparation
         val button: ImageButton = view.findViewById<View>(R.id.imageButtonPreparationTime) as ImageButton
@@ -68,11 +81,13 @@ class AlarmFragment : Fragment() {
             val text = "$h : $m"
             if (whichButton) {
                 editTextTimePreparation.setText(text)
+                saveSharedPreference("preparationTime", h * 60 + m)
             } else {
                 editTextTimeTravel.setText(text)
+                saveSharedPreference("travelTime", h * 60 + m)
             }
 
-            setTime(h, m)
+            setNextWakeUpTime()
 
             Toast.makeText(context, text, Toast.LENGTH_LONG).show()
 
@@ -81,18 +96,28 @@ class AlarmFragment : Fragment() {
         tpd.show()
     }
 
+    /**
+     * Mise a jour du temps du prochain réveil
+     */
+    @RequiresApi(Build.VERSION_CODES.N)
     @SuppressLint("SetTextI18n")
-    private fun setTime(hours: Int, minutes: Int)
+    private fun setNextWakeUpTime()
     {
-        /// \todo enregistrer les temps en local
+        var retour = wakeUpTime - sharedPref.getInt("preparationTime", 0) - sharedPref.getInt("travelTime", 0)
 
+        saveSharedPreference("totalTime", retour)
+        editTextTimeTotal.setText("${retour / 60} : ${retour % 60}")
+    }
 
-        val workHour = 8
-        val workMinute = 0
+    /**
+     * Sauvegarde des sharedPreferences
+     * @param KEY_NAME: String qui represente le nom de la sharedPreference
+     * @param value: Int qui est la valeur à sauvegarder dans la sharedPreference
+     */
+    private fun saveSharedPreference(KEY_NAME: String, value: Int) {
+        val editor: SharedPreferences.Editor = sharedPref.edit()
 
-        Fhours += workHour - hours
-        Fminutes += workMinute - minutes
-
-        editTextTimeTotal.setText("${Fhours.toString()} : ${Fminutes.toString()}")
+        editor.putInt(KEY_NAME, value)
+        editor.apply()
     }
 }
