@@ -12,7 +12,9 @@
             android:layout_weight="1"
             android:clickable="true"
             android:visibility="invisible"
-            app:srcCompat="@drawable/ic_baseline_edit_24"/>
+            app:srcCompat="@drawable/ic_baseline_edit_24"
+            android:background="@color/colorAccent" app:backgroundTint="@color/colorAccent"
+            app:rippleColor="@color/textColor"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/addWorkCodeOfCalendar"
@@ -21,7 +23,8 @@
             android:layout_weight="1"
             android:clickable="true"
             app:srcCompat="@drawable/ic_baseline_post_add_24"
-            android:visibility="invisible"/>
+            android:visibility="invisible"
+            android:background="@color/colorAccent" app:backgroundTint="@color/colorAccent"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/openCloseManagementWorkCodeOfCalendar"
@@ -30,6 +33,7 @@
             android:layout_weight="1"
             android:clickable="true"
             app:srcCompat="@drawable/ic_baseline_add_24"
-            android:focusable="true"/>
+            android:focusable="true"
+            android:background="@color/colorAccent" app:backgroundTint="@color/colorAccent"/>
     <!--app:srcCompat="@android:drawable/ic_menu_close_clear_cancel"-->
 </LinearLayout>

@@ -1,12 +1,10 @@
 package app.bako.view.settings.workcode
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.MenuItem
 import android.widget.Button
-import androidx.fragment.app.DialogFragment
+import android.widget.ImageButton
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,10 +14,10 @@ import app.bako.model.workcode.WorkCodeViewModel
 import app.bako.view.settings.workcode.popup.AddWorkCodePopup
 import kotlin.collections.ArrayList
 
-class CodesListActivity : DialogFragment() {
+class CodesListActivity : AppCompatActivity() {
     //Button of page
-    private var addWorkCode:Button? = null
-    private var addDayOffCode:Button? = null
+    private var addWorkCode:ImageButton? = null
+    private var addDayOffCode:ImageButton? = null
 
     //WorkCodeManager
     private var workCodeList:ArrayList<WorkCodeAdapter>? = null
@@ -30,45 +28,35 @@ class CodesListActivity : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-//            param1 = it.getString(ARG_PARAM1)
-//            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
-    @SuppressLint("CutPasteId")
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val view: View = inflater.inflate(R.layout.fragment_codes_list, container, false)
-        addWorkCode = view.findViewById<Button>(R.id.addWorkCode)
-        addDayOffCode = view.findViewById(R.id.addWorkCode)
-
+        setContentView(R.layout.activity_codes_list)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         //Récupération des data workCode
-        buildWorkCodeRecyclerView(view)
+        buildWorkCodeRecyclerView()
         setAddButton()
 
+    }
 
-        // Inflate the layout for this fragment
-        return view
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        finish();
+        return true;
     }
 
     private fun setAddButton() {
+        addWorkCode = findViewById(R.id.addWorkCode)
         addWorkCode!!.setOnClickListener{
-            val fm: FragmentManager = this.parentFragmentManager
+            val fm: FragmentManager = supportFragmentManager
             val editNameDialogFragment: AddWorkCodePopup = AddWorkCodePopup()
+
             editNameDialogFragment.show(fm, "fragment_edit_name")
         }
     }
-    private fun buildWorkCodeRecyclerView(view: View) {
-        recyclerViewWorkCode = view.findViewById<RecyclerView>(R.id.list_WorkCode)
-
-        adapterWorkCode = WorkCodeAdapter(view.context)
+    private fun buildWorkCodeRecyclerView() {
+        recyclerViewWorkCode = findViewById<RecyclerView>(R.id.list_WorkCode)
+        adapterWorkCode = WorkCodeAdapter(this)
         recyclerViewWorkCode!!.adapter = adapterWorkCode
-        recyclerViewWorkCode!!.layoutManager = LinearLayoutManager(requireContext())
+        recyclerViewWorkCode!!.layoutManager = LinearLayoutManager(this)
         mWorkCodeViewModel = ViewModelProvider(this).get(WorkCodeViewModel::class.java)
-        mWorkCodeViewModel.readAllData.observe(viewLifecycleOwner, androidx.lifecycle.Observer { workCode ->
+        mWorkCodeViewModel.readAllData.observe(this, androidx.lifecycle.Observer { workCode ->
             adapterWorkCode!!.setData(workCode)
         })
 

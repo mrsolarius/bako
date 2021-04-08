@@ -1,13 +1,17 @@
 package app.bako.view.settings
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceFragmentCompat
 import app.bako.R
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.preference.Preference
+import android.content.SharedPreferences
+import androidx.preference.PreferenceManager
 import app.bako.view.settings.workcode.CodesListActivity
 
 
@@ -39,6 +43,7 @@ class SettingsActivity : AppCompatActivity() {
     class SettingsFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey)
+
         }
 
         override fun onPreferenceTreeClick(preference: Preference?): Boolean {
@@ -46,13 +51,26 @@ class SettingsActivity : AppCompatActivity() {
             if (key.equals("startWorkCode")){
                 showSettingDialog()
             }
+
+            if (key.equals("themeSwitch")){
+
+                val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity)
+                var editor = prefs.getBoolean(key, true)
+
+                when (editor){
+                    true -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    false -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                }
+                Log.i("TAG", "onPreferenceTreeClick: "+editor)
+            }
+
             return super.onPreferenceTreeClick(preference)
         }
 
         fun showSettingDialog(){
-            val fm: FragmentManager = this.parentFragmentManager
-            val editNameDialogActivity: CodesListActivity = CodesListActivity()
-            editNameDialogActivity.show(fm, "fragment_edit_name")
+            val intent = Intent(activity, CodesListActivity::class.java)
+            startActivity(intent)
+
         }
     }
 }

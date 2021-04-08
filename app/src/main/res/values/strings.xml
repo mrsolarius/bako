@@ -33,7 +33,7 @@
     <string name="heure_de_d_but_de_travail">Heure de début de travail</string>
     <string name="heure_de_fin_de_travail">Heure de fin de travail</string>
     <string name="couleur">Couleur</string>
-    <string name="ajouteroumodifier">AjouterOuModifier</string>
+    <string name="ajouteroumodifier">Ajouter Ou Modifier</string>
     <string name="line_2">Line 2</string>
     <string name="editworkcode">EditWorkCode</string>
     <string name="line_3">line 3</string>
@@ -61,4 +61,5 @@
     <string name="edit_codes">Codes Settings</string>
     <string name="pr">Pré</string>
     <string name="re">Ré</string>
+    <string name="medical_planning">Gestion de planning medical</string>
 </resources>

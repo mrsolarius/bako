@@ -23,7 +23,7 @@
 
     <PreferenceCategory app:title="Theme">
         <SwitchPreference
-                app:key="@string/themeKey"
+                app:key="themeSwitch"
                 app:title="@string/themeTitle"
                 app:defaultValue="@bool/islightOrNightTheme"/>
     </PreferenceCategory>

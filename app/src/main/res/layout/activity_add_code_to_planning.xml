@@ -1,63 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.navigation.fragment.AddCodeToPlanningFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              tools:context=".view.navigation.fragment.AddCodeToPlanningFragment" android:orientation="vertical"
+              android:padding="20dp">
 
 
-    <TextView
-        android:id="@+id/labelJournee"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:text="Journée"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editTextJournee"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="date"
-        app:layout_constraintStart_toStartOf="@+id/labelJournee"
-        app:layout_constraintTop_toBottomOf="@+id/labelJournee" />
-
-    <TextView
-        android:id="@+id/labelCode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="code"
-        app:layout_constraintStart_toStartOf="@+id/editTextJournee"
-        app:layout_constraintTop_toBottomOf="@+id/editTextJournee" />
-
-    <Spinner
-        android:id="@+id/spinnerSelectCodeForAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@+id/labelCode"
-        app:layout_constraintTop_toBottomOf="@+id/labelCode" />
-
-    <Button
-        android:id="@+id/confirmAddCodeToPlanning"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="34dp"
-        android:text="@string/ajouteroumodifier"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerSelectCodeForAdd" />
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:layout_weight="2">
+            <TextView
+                    android:id="@+id/labelJournee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Journée"
+            />
+            <EditText
+                    android:id="@+id/editTextJournee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="date"
+                    android:textColor="@color/textColor"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" android:layout_weight="2">
+            <TextView
+                    android:id="@+id/labelCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="code"
+            />
+            <Spinner
+                    android:id="@+id/spinnerSelectCodeForAdd"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+            />
+        </LinearLayout>
+    </LinearLayout>
 
     <Switch
-        android:id="@+id/previsionnelOrReel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Prévisionnel/Réel"
-        app:layout_constraintStart_toStartOf="@+id/spinnerSelectCodeForAdd"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerSelectCodeForAdd" />
+            android:id="@+id/previsionnelOrReel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Prévisionnel/Réel"
+    />
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_marginTop="20dp">
+        <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:layout_weight="1"/>
+        <Button
+                android:text="@android:string/cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/cancel_btn"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"/>
+        <Button
+                android:id="@+id/confirmAddCodeToPlanning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ajouteroumodifier"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"/>
+    </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

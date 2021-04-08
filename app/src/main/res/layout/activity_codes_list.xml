@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              tools:context=".view.settings.workcode.CodesListActivity" android:orientation="vertical">
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:background="@drawable/layout_bg" android:padding="20dp"
+            android:layout_margin="40dp">
+        <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/definition_des_codes_de_travail"
+                android:gravity="center"/>
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_WorkCode"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+        >
+        </androidx.recyclerview.widget.RecyclerView>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:layout_weight="1"/>
+            <ImageButton
+                    android:id="@+id/addWorkCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_add_24" android:background="@drawable/layout_bg_color_accent"
+                    android:padding="10dp" android:layout_weight="0"/>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:background="@drawable/layout_bg" android:padding="20dp"
+            android:layout_margin="40dp">
+        <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/definition_des_codes_de_conges"
+                android:textAlignment="center"/>
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_DayOffCode"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+        >
+        </androidx.recyclerview.widget.RecyclerView>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:layout_weight="1"/>
+            <ImageButton
+                    android:id="@+id/addDayOffCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_add_24" android:background="@drawable/layout_bg_color_accent"
+                    android:padding="10dp" android:layout_weight="0"
+            />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
