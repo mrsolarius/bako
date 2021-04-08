@@ -100,12 +100,14 @@
                 android:id="@+id/switchPreparation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Réveil de préparation"/>
+                android:text="Réveil de préparation" android:textColor="@color/textColor"
+                android:textColorHighlight="@color/colorAccent" android:textColorLink="@color/colorAccent"/>
         <Switch
                 android:id="@+id/switchTravel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Réveil de départ"/>
+                android:text="Réveil de départ" android:textColor="@color/textColor"
+                android:textColorHighlight="@color/colorAccent" android:textColorLink="@color/colorAccent"/>
     </LinearLayout>
 
 </LinearLayout>

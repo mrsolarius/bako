@@ -1,45 +1,42 @@
-package app.bako.view.navigation
+package app.bako.view.navigation.fragment
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
-import android.content.DialogInterface
 import android.os.Bundle
-import android.view.MenuItem
-import android.view.MotionEvent
-import android.view.View
+import android.view.*
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import app.bako.R
 import app.bako.model.workcode.WorkCodeViewModel
 import app.bako.model.workingday.WorkingDay
 import app.bako.model.workingday.WorkingDayViewModel
 import kotlinx.android.synthetic.main.activity_add_code_to_planning.*
-import kotlinx.android.synthetic.main.popup_manage_workcode.*
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 @SuppressLint("UseSwitchCompatOrMaterialCode")
-class AddCodeToPlanning : AppCompatActivity() {
+class AddCodeToPlanningFragment : DialogFragment() {
 
     var myCalendar: Calendar = Calendar.getInstance();
     lateinit var choixJournee:EditText
     lateinit var spinnerCodeAffectation:Spinner
     lateinit var confirmAddCodeToPlanning:Button
     lateinit var previsionnelOrReel: Switch
+    lateinit var cancelButton: Button
     var workingDay : WorkingDay? = null
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        val view: View = inflater.inflate(R.layout.activity_add_code_to_planning, container, false)
+        setValueOfSpinner(view)
 
-    @SuppressLint("ClickableViewAccessibility")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_code_to_planning)
-        setValueOfSpinner()
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        getViewElements();
+        getViewElements(view);
 
         val date = OnDateSetListener { view, year, monthOfYear, dayOfMonth -> // TODO Auto-generated method stub
             myCalendar.set(Calendar.YEAR, year)
@@ -48,15 +45,33 @@ class AddCodeToPlanning : AppCompatActivity() {
             updateTextAndSetCurrentWorkingDay()
         }
 
-        editTextJournee.setOnTouchListener { view, motionEvent ->
+        choixJournee.setOnTouchListener { view, motionEvent ->
             if (motionEvent.action == MotionEvent.ACTION_DOWN) {
-                DatePickerDialog(this, date, myCalendar[Calendar.YEAR], myCalendar[Calendar.MONTH],
-                        myCalendar[Calendar.DAY_OF_MONTH]).show()
+                DatePickerDialog(view.context, date, myCalendar[Calendar.YEAR], myCalendar[Calendar.MONTH],
+                    myCalendar[Calendar.DAY_OF_MONTH]).show()
             }
             true
         }
 
+        cancelButton.setOnClickListener {
+            dismiss()
+        }
+
         onValidate();
+        return view
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val width = (resources.displayMetrics.widthPixels * 0.95).toInt()
+        val height = (resources.displayMetrics.heightPixels * 0.30).toInt()
+        dialog!!.window!!.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
 //
 //        confirmAddCodeToPlanning.setOnClickListener{
 //            var test = workingDay
@@ -64,11 +79,12 @@ class AddCodeToPlanning : AppCompatActivity() {
 //        }
     }
 
-    private fun getViewElements() {
-        choixJournee = findViewById<EditText>(R.id.editTextJournee);
-        spinnerCodeAffectation = findViewById<View>(R.id.spinnerSelectCodeForAdd) as Spinner
-        previsionnelOrReel = findViewById(R.id.previsionnelOrReel)
-        confirmAddCodeToPlanning = findViewById(R.id.confirmAddCodeToPlanning)
+    private fun getViewElements(view : View) {
+        choixJournee = view.findViewById<EditText>(R.id.editTextJournee);
+        spinnerCodeAffectation = view.findViewById<View>(R.id.spinnerSelectCodeForAdd) as Spinner
+        previsionnelOrReel = view.findViewById(R.id.previsionnelOrReel)
+        confirmAddCodeToPlanning = view.findViewById(R.id.confirmAddCodeToPlanning)
+        cancelButton = view.findViewById(R.id.cancel_btn)
     }
 
     @SuppressLint("SetTextI18n")
@@ -99,12 +115,6 @@ class AddCodeToPlanning : AppCompatActivity() {
         })
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        //Go back arrow btn
-        finish();
-        return true;
-    }
-
     @SuppressLint("SimpleDateFormat")
     fun onValidate(){
         confirmAddCodeToPlanning.setOnClickListener {
@@ -132,17 +142,16 @@ class AddCodeToPlanning : AppCompatActivity() {
                 mWorkCodeViewModel.updateWorkCode(workingDay!!)
             }
 
-            finish()
+            dismiss()
         }
     }
 
-    fun setValueOfSpinner(){
+    fun setValueOfSpinner(view: View){
         val mWorkCodeViewModel = ViewModelProvider(this).get(WorkCodeViewModel::class.java)
 
         mWorkCodeViewModel.getCodeList().observe(this, { data ->
             data.let {
-                val spinnerAdapter =
-                        ArrayAdapter(this, android.R.layout.simple_spinner_item, data)
+                val spinnerAdapter = ArrayAdapter(view.context, android.R.layout.simple_spinner_item, data)
                 spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 spinnerCodeAffectation.adapter = spinnerAdapter
                 spinnerAdapter.addAll();
