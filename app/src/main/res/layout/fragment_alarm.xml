@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              tools:context=".view.navigation.fragment.AlarmFragment" android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.navigation.fragment.AlarmFragment" android:orientation="vertical">
 
     <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:background="@drawable/layout_bg"
-            android:padding="10dp" android:layout_margin="30dp">
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:background="@drawable/layout_bg"
+        android:padding="10dp" android:layout_margin="30dp">
         <TextView
-                android:id="@+id/textViewNextWakeUp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Prochain réveil"
-                android:textAlignment="center"/>
+            android:id="@+id/textViewNextWakeUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Prochain réveil"
+            android:textAlignment="center"/>
         <EditText
-                android:id="@+id/editTextTimeTotal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="101dp"
-                android:layout_marginTop="11dp"
-                android:layout_marginEnd="101dp"
-                android:ems="10"
-                android:inputType="time"
-                android:textColor="@color/textColor" android:textColorHint="@color/design_default_color_on_primary"/>
+            android:id="@+id/editTextTimeTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="101dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="101dp"
+            android:ems="10"
+            android:inputType="time"
+            android:textColor="@color/textColor" android:textColorHint="@color/design_default_color_on_primary"/>
     </LinearLayout>
 
     <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:layout_marginTop="60dp">
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:layout_marginTop="60dp">
 
         <LinearLayout
             android:id="@+id/linearLayoutPreparation"
-            android:layout_width="1250dp"
+            android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginStart="40dp"
             android:background="@drawable/layout_bg"
@@ -53,10 +53,11 @@
 
             <EditText
                 android:id="@+id/editTextTimePreparation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:textColor="@color/textColor"/>
+                android:textColor="@color/textColor" />
 
             <ImageButton
                 android:id="@+id/imageButtonPreparationTime"
@@ -68,8 +69,8 @@
                 android:src="@drawable/ic_baseline_edit_24" />
         </LinearLayout>
         <Space
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:layout_weight="1"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_weight="1"/>
 
         <LinearLayout
             android:id="@+id/linearLayoutTravel"
@@ -90,10 +91,11 @@
 
             <EditText
                 android:id="@+id/editTextTimeTravel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="time"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content" android:textColor="@color/textColor"/>
+                android:textColor="@color/textColor" />
 
             <ImageButton
                 android:id="@+id/imageButtonTravelTime"
@@ -107,23 +109,23 @@
     </LinearLayout>
 
     <LinearLayout
-            android:orientation="vertical"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:background="@drawable/layout_bg"
+        android:padding="30dp" android:layout_marginTop="60dp" android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp">
+        <Switch
+            android:id="@+id/switchPreparation"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:background="@drawable/layout_bg"
-            android:padding="30dp" android:layout_marginTop="60dp" android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp">
+            android:layout_height="wrap_content"
+            android:text="Réveil de préparation" android:textColor="@color/textColor"
+            android:textColorHighlight="@color/colorAccent" android:textColorLink="@color/colorAccent"/>
         <Switch
-                android:id="@+id/switchPreparation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Réveil de préparation" android:textColor="@color/textColor"
-                android:textColorHighlight="@color/colorAccent" android:textColorLink="@color/colorAccent"/>
-        <Switch
-                android:id="@+id/switchTravel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Réveil de départ" android:textColor="@color/textColor"
-                android:textColorHighlight="@color/colorAccent" android:textColorLink="@color/colorAccent"/>
+            android:id="@+id/switchTravel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Réveil de départ" android:textColor="@color/textColor"
+            android:textColorHighlight="@color/colorAccent" android:textColorLink="@color/colorAccent"/>
     </LinearLayout>
 
 </LinearLayout>

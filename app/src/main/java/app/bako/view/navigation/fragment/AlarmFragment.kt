@@ -23,6 +23,7 @@ import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import app.bako.R
 import kotlinx.android.synthetic.main.fragment_alarm.*
+import kotlin.math.abs
 
 
 /**
@@ -30,10 +31,10 @@ import kotlinx.android.synthetic.main.fragment_alarm.*
  */
 class AlarmFragment : Fragment() {
 
-    private var wakeUpTime = 8*60 + 0 // heure supposée de début de travail en minutes
-    private var preparationTime = 0
-    private var travelTime = 0
-    private var totalTime = 0
+    private var wakeUpTime = 8*60 + 0  // heure supposée de début de travail en minutes
+    private var preparationTime = 0  // temps de préparation en minute
+    private var travelTime = 0  // temps de trajet en minute
+    private var totalTime = 0  // temps de préparation + temps de trajet en minute
 
     private lateinit var sharedPref: SharedPreferences
 
@@ -54,7 +55,7 @@ class AlarmFragment : Fragment() {
         travelTime = sharedPref.getInt("travelTime", 0)
         totalTime = sharedPref.getInt("totalTime", 0)
 
-        // Activation d'un TimePicker quand on appuie sur l'image bouton du temps de préparation
+        // Implémentation d'un TimePicker quand on appuie sur l'image-bouton du temps de préparation
         val button: ImageButton = view.findViewById<View>(R.id.imageButtonPreparationTime) as ImageButton
         button.setOnClickListener { v ->
             if (v != null) {
@@ -62,7 +63,7 @@ class AlarmFragment : Fragment() {
             }
         }
 
-        // Activation d'un TimePicker quand on appuie sur l'image bouton du temps de trajet
+        // Implémentation d'un TimePicker quand on appuie sur l'image-bouton du temps de trajet
         val button2: ImageButton = view.findViewById<View>(R.id.imageButtonTravelTime) as ImageButton
         button2.setOnClickListener { v ->
             if (v != null) {
@@ -70,6 +71,7 @@ class AlarmFragment : Fragment() {
             }
         }
 
+        // Implémentation du switch pour activer le temps de préparation
         val switch1: Switch = view.findViewById<View>(R.id.switchPreparation) as Switch
         switch1.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) linearLayoutPreparation.visibility = View.VISIBLE else {
@@ -79,6 +81,7 @@ class AlarmFragment : Fragment() {
             }
         }
 
+        // Implémentation du switch pour activer le temps de trajet
         val switch2: Switch = view.findViewById<View>(R.id.switchTravel) as Switch
         switch2.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) linearLayoutTravel.visibility = View.VISIBLE else {
@@ -148,7 +151,7 @@ class AlarmFragment : Fragment() {
     }
 
     /**
-     * Mise en place d'une alarme en fonction du temps du editTextTimeTotal
+     * Mise en place d'une alarme en fonction du temps du wakeUpTime
      */
     private fun setAlarm(timeInMillis: Int) {
         val intent = Intent(context, MyAlarm::class.java)
@@ -157,7 +160,7 @@ class AlarmFragment : Fragment() {
 
         alarmManager.set(
                 AlarmManager.RTC_WAKEUP,
-                System.currentTimeMillis() + (10*1000),
+                (10*1000), /// \todo Temps mis à 10s pour la démo, il faut le changer par System.currentTimeMillis() + abs( wakeUpTime*60*1000 - System.currentTimeMillis()*60*1000 )
                 pendingIntent
         )
 
@@ -165,7 +168,7 @@ class AlarmFragment : Fragment() {
     }
 
     /**
-     * Classe alarme
+     * Classe alarme qui implémente un toas et les vibrations
      */
     class MyAlarm : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
