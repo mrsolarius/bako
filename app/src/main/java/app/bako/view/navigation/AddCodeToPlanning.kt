@@ -10,6 +10,8 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import app.bako.R
 import app.bako.model.workcode.WorkCodeViewModel
@@ -30,13 +32,14 @@ class AddCodeToPlanning : AppCompatActivity() {
     lateinit var confirmAddCodeToPlanning:Button
     lateinit var previsionnelOrReel: Switch
     var workingDay : WorkingDay? = null
+    var listCodeAffectation:List<String>? = null
 
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_code_to_planning)
-        setValueOfSpinner()
+        setValuesOfSpinner()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         getViewElements();
@@ -56,6 +59,8 @@ class AddCodeToPlanning : AppCompatActivity() {
             true
         }
 
+        onSwitchPrevisionnelOrReel()
+
         onValidate();
 //
 //        confirmAddCodeToPlanning.setOnClickListener{
@@ -64,10 +69,30 @@ class AddCodeToPlanning : AppCompatActivity() {
 //        }
     }
 
+    private fun onSwitchPrevisionnelOrReel() {
+//        previsionnelOrReel.setOnClickListener {
+//            if (previsionnelOrReel.) {
+//                Toast.makeText(this, "Selected", Toast.LENGTH_SHORT).show()
+//            } else {
+//                Toast.makeText(this, "Unselected", Toast.LENGTH_SHORT).show()
+//            }
+//        }
+        previsionnelOrReel.setOnCheckedChangeListener { compoundButton, isChecked ->
+            if(workingDay != null) {
+                if (isChecked) {
+                    setValueOfSpinnerByCode(workingDay!!.realWorking)
+                } else {
+                    setValueOfSpinnerByCode(workingDay!!.prevWorkCode)
+                }
+            }
+        }
+    }
+
     private fun getViewElements() {
         choixJournee = findViewById<EditText>(R.id.editTextJournee);
         spinnerCodeAffectation = findViewById<View>(R.id.spinnerSelectCodeForAdd) as Spinner
         previsionnelOrReel = findViewById(R.id.previsionnelOrReel)
+        previsionnelOrReel.visibility = View.INVISIBLE
         confirmAddCodeToPlanning = findViewById(R.id.confirmAddCodeToPlanning)
     }
 
@@ -91,12 +116,28 @@ class AddCodeToPlanning : AppCompatActivity() {
                 if(data.isNotEmpty()){
                     workingDay = data[0].workingDay
                     confirmAddCodeToPlanning.text = "Mettre à jour"
+                    previsionnelOrReel.visibility = View.VISIBLE
+                    setValueOfSpinnerByCode(workingDay!!.prevWorkCode)
                 }else{
                     workingDay = null
                     confirmAddCodeToPlanning.text = "Ajouter"
+                    previsionnelOrReel.visibility = View.INVISIBLE
                 }
             }
         })
+    }
+
+    private fun setValueOfSpinnerByCode(code:String?) {
+        spinnerCodeAffectation.setSelection(getPositionCodeOnSpinner(code))
+    }
+
+    private fun getPositionCodeOnSpinner(prevWorkCode: String?): Int {
+        for(i in 0..listCodeAffectation!!.size){
+            if(prevWorkCode == listCodeAffectation!![i]){
+                return i
+            }
+        }
+        return -1
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -118,10 +159,16 @@ class AddCodeToPlanning : AppCompatActivity() {
             if(workingDay == null) {
                 workingDay = WorkingDay(date)
                 mustCreate = true
+                workingDay!!.prevWorkCode = workCodeSelected
+                workingDay!!.realWorking = workCodeSelected
+            }else{
+                if(previsionnelOrReel.isChecked) {
+                    workingDay!!.realWorking = workCodeSelected
+                }else{
+                    workingDay!!.prevWorkCode = workCodeSelected
+                }
             }
 
-            workingDay!!.prevWorkCode = workCodeSelected
-            workingDay!!.realWorking = workCodeSelected
 
             //sauvegarde de l'objet
             val mWorkCodeViewModel = ViewModelProvider(this).get(WorkingDayViewModel::class.java)
@@ -136,11 +183,12 @@ class AddCodeToPlanning : AppCompatActivity() {
         }
     }
 
-    fun setValueOfSpinner(){
+    fun setValuesOfSpinner(){
         val mWorkCodeViewModel = ViewModelProvider(this).get(WorkCodeViewModel::class.java)
 
         mWorkCodeViewModel.getCodeList().observe(this, { data ->
             data.let {
+                listCodeAffectation = data
                 val spinnerAdapter =
                         ArrayAdapter(this, android.R.layout.simple_spinner_item, data)
                 spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
