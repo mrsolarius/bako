@@ -9,8 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import app.bako.R
+import app.bako.model.workcode.WorkCodeViewModel
+import app.bako.model.workingday.WorkingDayViewModel
 import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.components.Legend.LegendForm
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -27,6 +31,7 @@ import com.github.mikephil.charting.utils.Utils
 class HomeFragment : Fragment() {
 
     lateinit var chart: LineChart
+    private lateinit var mWorkingDayViewModel: WorkingDayViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -36,29 +41,54 @@ class HomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         chart = view.findViewById<LineChart>(R.id.chartNbHeureAnnee)
 
-        chart.setBackgroundColor(Color.WHITE)
+        chart.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark))
+        resources
+        chart.xAxis.textColor = getResources().getColor(R.color.colorAccent)
+        chart.axisLeft.textColor = getResources().getColor(R.color.colorAccent)
+        chart.axisRight.isEnabled = false
 
-        chart.description.isEnabled=false
+        chart.setDrawGridBackground(false);
+        chart.getDescription().setEnabled(false);
+        chart.setDrawBorders(false);
 
-        chart.setTouchEnabled(true)
+        chart.setTouchEnabled(false);
+        chart.setDragEnabled(false);
+        chart.setScaleEnabled(false);
+        chart.legend.textColor = getResources().getColor(R.color.colorAccent)
 
-        chart.setOnChartValueSelectedListener(null)
-        chart.setDrawGridBackground(false)
 
-//        val mv = MarkerView(context, R.layout.c)
+        val mWorkingDayRepository = ViewModelProvider(this).get(WorkingDayViewModel::class.java)
+        mWorkingDayRepository.getAllWorkingDayWithWorkCode().observe(viewLifecycleOwner, { workingDay ->
+            workingDay.let {
+                var hours: ArrayList<Int> = ArrayList()
+                var totalHours = 0;
+                it.forEach {
+                    val hour = ((it.realWorkCode.endHour.time - it.realWorkCode.startHour.time)/1000/60/60).toInt()
+                    totalHours += hour
+                    hours.add(totalHours)
+                }
+                setData(view, hours)
+                chart.notifyDataSetChanged()
+                chart.animateX(300);
+            }
+        })
 
-        //add data
-        setData(view, 45, 180);
+        val l = chart.legend
 
+        // draw legend entries as lines
+
+        // draw legend entries as lines
+        l.form = LegendForm.LINE
         return view
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
-    private fun setData(vue:View, count: Int, range: Int) {
+    private fun setData(vue: View, value: ArrayList<Int>) {
         val values: ArrayList<Entry> = ArrayList()
-        for (i in 0 until count) {
-            val valueEntry = (Math.random() * range).toFloat() - 30
-            values.add(Entry(i.toFloat(), valueEntry, resources.getDrawable(R.drawable.star)))
+        var position = 0
+        for (i in value) {
+            values.add(Entry(position.toFloat(), i.toFloat(), resources.getDrawable(R.drawable.star)))
+            position+=1
         }
         val set1: LineDataSet
         if (chart.getData() != null &&
@@ -70,46 +100,20 @@ class HomeFragment : Fragment() {
             chart.notifyDataSetChanged()
         } else {
             // create a dataset and give it a type
-            set1 = LineDataSet(values, "DataSet 1")
+            set1 = LineDataSet(values, "")
             set1.setDrawIcons(false)
+            set1.setDrawValues(false)
 
-            // draw dashed line
-            set1.enableDashedLine(10f, 5f, 0f)
-
-            // black lines and points
-            set1.color = Color.BLACK
-            set1.setCircleColor(Color.BLACK)
+            set1.color = getResources().getColor(R.color.colorAccent)
+            set1.setDrawCircles(false)
 
             // line thickness and point size
-            set1.lineWidth = 1f
-            set1.circleRadius = 3f
+            set1.lineWidth = 3f
+            set1.circleRadius = 0f
 
-            // draw points as solid circles
-            set1.setDrawCircleHole(false)
+            set1.setLabel("Heure de travail");
 
-            // customize legend entry
-            set1.formLineWidth = 1f
-            set1.formLineDashEffect = DashPathEffect(floatArrayOf(10f, 5f), 0f)
-            set1.formSize = 15f
 
-            // text size of values
-            set1.valueTextSize = 9f
-
-            // draw selection line as dashed
-            set1.enableDashedHighlightLine(10f, 5f, 0f)
-
-            // set the filled area
-            set1.setDrawFilled(true)
-            set1.fillFormatter = IFillFormatter { dataSet, dataProvider -> chart.getAxisLeft().getAxisMinimum() }
-
-            // set color of filled area
-            if (Utils.getSDKInt() >= 18) {
-                // drawables only supported on api level 18 and above
-                val drawable = ContextCompat.getDrawable(vue.context, R.drawable.fade_red)
-                set1.fillDrawable = drawable
-            } else {
-                set1.fillColor = Color.BLACK
-            }
             val dataSets: ArrayList<ILineDataSet> = ArrayList()
             dataSets.add(set1) // add the data sets
 
