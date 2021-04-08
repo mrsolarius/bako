@@ -18,6 +18,7 @@ import app.bako.model.workcode.WorkCodeViewModel
 import com.flask.colorpicker.ColorPickerView
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.popup_manage_workcode.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -30,7 +31,7 @@ class AddWorkCodePopup() : DialogFragment() {
     private lateinit var editHeureFin: TextView
     private lateinit var colorPicker: Button
     private lateinit var validateEdition: Button
-    private lateinit var cancelEdition: FloatingActionButton
+    private lateinit var cancelEdition: Button
     private var color : Int = 0
 
     private val currentBackgroundColor = -0x1
@@ -58,8 +59,22 @@ class AddWorkCodePopup() : DialogFragment() {
 
         setColorPickerOnClick()
 
+        cancelEdition.setOnClickListener {
+            dismiss()
+        }
+
         return view
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val width = (resources.displayMetrics.widthPixels * 0.95).toInt()
+        val height = (resources.displayMetrics.heightPixels * 0.30).toInt()
+        dialog!!.window!!.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
+        //THIS WILL MAKE WIDTH 90% OF SCREEN
+        //HEIGHT WILL BE WRAP_CONTENT
+        //getDialog().getWindow().setLayout(width, height);
     }
 
     @SuppressLint("SetTextI18n", "ClickableViewAccessibility")
@@ -205,6 +220,6 @@ class AddWorkCodePopup() : DialogFragment() {
         colorPicker = view.findViewById(R.id.colorPickerWorkCode)
 
         validateEdition = view.findViewById(R.id.addOrUpdateCodeTravail)
-        cancelEdition = view.findViewById<FloatingActionButton>(R.id.CloseWorkCodeManagement)
+        cancelEdition = view.findViewById(R.id.cancel_dialog_btn)
     }
 }

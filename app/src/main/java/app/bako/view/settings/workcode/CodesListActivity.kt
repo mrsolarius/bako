@@ -1,7 +1,9 @@
 package app.bako.view.settings.workcode
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
@@ -14,8 +16,8 @@ import kotlin.collections.ArrayList
 
 class CodesListActivity : AppCompatActivity() {
     //Button of page
-    private var addWorkCode:Button? = null
-    private var addDayOffCode:Button? = null
+    private var addWorkCode:ImageButton? = null
+    private var addDayOffCode:ImageButton? = null
 
     //WorkCodeManager
     private var workCodeList:ArrayList<WorkCodeAdapter>? = null
@@ -34,11 +36,17 @@ class CodesListActivity : AppCompatActivity() {
 
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        finish();
+        return true;
+    }
+
     private fun setAddButton() {
         addWorkCode = findViewById(R.id.addWorkCode)
         addWorkCode!!.setOnClickListener{
             val fm: FragmentManager = supportFragmentManager
             val editNameDialogFragment: AddWorkCodePopup = AddWorkCodePopup()
+
             editNameDialogFragment.show(fm, "fragment_edit_name")
         }
     }

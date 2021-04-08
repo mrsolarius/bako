@@ -18,13 +18,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextJournee"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="date"
-        app:layout_constraintStart_toStartOf="@+id/labelJournee"
-        app:layout_constraintTop_toBottomOf="@+id/labelJournee" />
+            android:id="@+id/editTextJournee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="date"
+            app:layout_constraintStart_toStartOf="@+id/labelJournee"
+            app:layout_constraintTop_toBottomOf="@+id/labelJournee" android:textColor="@color/textColor"/>
 
     <TextView
         android:id="@+id/labelCode"

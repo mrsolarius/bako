@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import app.bako.R
 import app.bako.model.workcode.WorkCode
 import app.bako.view.navigation.MainActivity
 import app.bako.view.settings.workcode.popup.AddWorkCodePopup
@@ -17,8 +16,19 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.text.SimpleDateFormat
 import java.util.*
 import androidx.appcompat.app.AppCompatActivity
+import android.graphics.LightingColorFilter
 
+import android.graphics.ColorFilter
 
+import android.graphics.Color
+
+import android.graphics.drawable.Drawable
+import android.widget.ImageButton
+import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
+import app.bako.R
+import kotlinx.android.synthetic.main.workcode_item.view.*
 
 
 class WorkCodeAdapter(var context: Context) :
@@ -29,15 +39,17 @@ class WorkCodeAdapter(var context: Context) :
         var codeAffectation: TextView
         var startHour: TextView
         var endHour: TextView
-        var buttonEditWorkCode: FloatingActionButton
+        var buttonEditWorkCode: ImageButton
+        var layoutBackGround : LinearLayout
 //        var color: TextView
 
         init {
             codeAffectation = itemView.findViewById(R.id.textview_workCode)
             startHour = itemView.findViewById(R.id.textview_workStartHour)
             endHour = itemView.findViewById(R.id.textview_workEndHour)
+            layoutBackGround = itemView.findViewById(R.id.layout_bg)
 //            color = itemView.findViewById(R.id.colorPicker)
-            buttonEditWorkCode = itemView.findViewById<FloatingActionButton>(R.id.editWorkCode)
+            buttonEditWorkCode = itemView.findViewById(R.id.editWorkCode)
         }
     }
 
@@ -53,7 +65,10 @@ class WorkCodeAdapter(var context: Context) :
         holder.codeAffectation.setText(currentWorkCode.code)
         holder.startHour.setText(HourToString(currentWorkCode.startHour))
         holder.endHour.setText(HourToString(currentWorkCode.endHour))
-//        holder.color.setText(currentWorkCode.color)
+        val myIcon = ContextCompat.getDrawable(context, R.drawable.layout_bg)
+        val filter: ColorFilter = LightingColorFilter(currentWorkCode.color, currentWorkCode.color)
+        myIcon!!.colorFilter = filter
+        holder.layoutBackGround.background = myIcon
         holder.buttonEditWorkCode.setOnClickListener{
             val addWorkCodePopup = AddWorkCodePopup()
             val bundle = Bundle()
