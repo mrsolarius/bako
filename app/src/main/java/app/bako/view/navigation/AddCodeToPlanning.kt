@@ -10,8 +10,6 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.get
-import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import app.bako.R
 import app.bako.model.workcode.WorkCodeViewModel
