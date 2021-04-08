@@ -13,7 +13,7 @@
                 android:name=".view.settings.SettingsActivity"
                 android:label="@string/title_activity_settings">
         </activity>
-        <activity android:name=".view.navigation.AddCodeToPlanning"></activity>
+        <activity android:name=".view.navigation.fragment.AddCodeToPlanningFragment"></activity>
         <activity android:name=".view.navigation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

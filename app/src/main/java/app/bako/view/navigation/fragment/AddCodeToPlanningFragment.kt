@@ -1,9 +1,8 @@
-package app.bako.view.navigation
+package app.bako.view.navigation.fragment
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.MotionEvent
@@ -16,13 +15,12 @@ import app.bako.model.workcode.WorkCodeViewModel
 import app.bako.model.workingday.WorkingDay
 import app.bako.model.workingday.WorkingDayViewModel
 import kotlinx.android.synthetic.main.activity_add_code_to_planning.*
-import kotlinx.android.synthetic.main.popup_manage_workcode.*
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 @SuppressLint("UseSwitchCompatOrMaterialCode")
-class AddCodeToPlanning : AppCompatActivity() {
+class AddCodeToPlanningFragment : AppCompatActivity() {
 
     var myCalendar: Calendar = Calendar.getInstance();
     lateinit var choixJournee:EditText
