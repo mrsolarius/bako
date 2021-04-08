@@ -9,6 +9,10 @@ import app.bako.model.DataBase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+/*
+ * WorkCodeViewModel
+ * Encapsulation des fonction du repository dans des coroutine pour execute directement le code dans les vu sans gérer de nouveau thread.
+ */
 class WorkCodeViewModel(application: Application): AndroidViewModel(application) {
 
     val readAllData: LiveData<List<WorkCode>>

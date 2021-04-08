@@ -3,6 +3,12 @@ package app.bako.model.workcode
 import androidx.lifecycle.LiveData
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * WorkCodeRepository
+ * Il permet d'encapsuler la DAO dans des fonction suspendu
+ *
+ * (une fonction suspendu peut être mise en pause et repris plus tard)
+ */
 class WorkCodeRepository(private val workCodeDao: WorkCodeDao) {
 
     val readAllData: LiveData<List<WorkCode>> = workCodeDao.readAllData()

@@ -3,6 +3,10 @@ package app.bako.model.dayoffcode
 import androidx.lifecycle.LiveData
 import androidx.room.*
 
+/*
+ * DayOffCodeDao Query
+ * C'est l'interface qui détermine la composition des query
+ */
 @Dao
 interface DayOffCodeDao {
     @Insert(onConflict = OnConflictStrategy.ABORT)

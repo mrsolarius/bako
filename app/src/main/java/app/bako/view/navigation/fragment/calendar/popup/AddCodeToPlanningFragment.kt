@@ -6,28 +6,30 @@ import android.app.DatePickerDialog.OnDateSetListener
 import android.os.Bundle
 import android.view.*
 import android.widget.*
+import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import app.bako.R
 import app.bako.model.workcode.WorkCodeViewModel
 import app.bako.model.workingday.WorkingDay
 import app.bako.model.workingday.WorkingDayViewModel
+import app.bako.utils.DateFormat.Companion.getFormattedDate
+import app.bako.utils.DateFormat.Companion.stringToDate
 import kotlinx.android.synthetic.main.activity_add_code_to_planning.*
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-@SuppressLint("UseSwitchCompatOrMaterialCode")
 class AddCodeToPlanningFragment : DialogFragment() {
 
-    var myCalendar: Calendar = Calendar.getInstance();
-    lateinit var choixJournee:EditText
-    lateinit var spinnerCodeAffectation:Spinner
-    lateinit var confirmAddCodeToPlanning:Button
-    lateinit var previsionnelOrReel: Switch
-    lateinit var cancelButton: Button
+    private var myCalendar: Calendar = Calendar.getInstance()
+    private lateinit var choixJournee:EditText
+    private lateinit var spinnerCodeAffectation:Spinner
+    private lateinit var confirmAddCodeToPlanning:Button
+    private lateinit var previsionnelOrReel: SwitchCompat
+    private lateinit var cancelButton: Button
     var workingDay : WorkingDay? = null
-    var listCodeAffectation:List<String>? = null
+    private var listCodeAffectation:List<String>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,17 +38,18 @@ class AddCodeToPlanningFragment : DialogFragment() {
         val view: View = inflater.inflate(R.layout.activity_add_code_to_planning, container, false)
         setValuesOfSpinner(view)
 
-        getViewElements(view);
+        getViewElements(view)
 
-        val date = OnDateSetListener { view, year, monthOfYear, dayOfMonth -> // TODO Auto-generated method stub
+        val date = OnDateSetListener { _, year, monthOfYear, dayOfMonth -> // TODO Auto-generated method stub
             myCalendar.set(Calendar.YEAR, year)
             myCalendar.set(Calendar.MONTH, monthOfYear)
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
             updateTextAndSetCurrentWorkingDay()
         }
-
-        choixJournee.setOnTouchListener { view, motionEvent ->
+        //Event listeneur sur la journée
+        choixJournee.setOnTouchListener { _, motionEvent ->
             if (motionEvent.action == MotionEvent.ACTION_DOWN) {
+                //Ouverture d'un calendrier
                 DatePickerDialog(view.context, date, myCalendar[Calendar.YEAR], myCalendar[Calendar.MONTH],
                     myCalendar[Calendar.DAY_OF_MONTH]).show()
             }
@@ -55,41 +58,24 @@ class AddCodeToPlanningFragment : DialogFragment() {
 
         onSwitchPrevisionnelOrReel()
 
+        //Button d'annulation
         cancelButton.setOnClickListener {
             dismiss()
         }
 
-        onValidate();
+        onValidate()
         return view
     }
 
     override fun onStart() {
         super.onStart()
         val width = (resources.displayMetrics.widthPixels * 0.95).toInt()
-        val height = (resources.displayMetrics.heightPixels * 0.30).toInt()
         dialog!!.window!!.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
     }
 
-    @SuppressLint("ClickableViewAccessibility")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-//
-//        confirmAddCodeToPlanning.setOnClickListener{
-//            var test = workingDay
-//            print("")
-//        }
-    }
-
     private fun onSwitchPrevisionnelOrReel() {
-//        previsionnelOrReel.setOnClickListener {
-//            if (previsionnelOrReel.) {
-//                Toast.makeText(this, "Selected", Toast.LENGTH_SHORT).show()
-//            } else {
-//                Toast.makeText(this, "Unselected", Toast.LENGTH_SHORT).show()
-//            }
-//        }
-        previsionnelOrReel.setOnCheckedChangeListener { compoundButton, isChecked ->
+        //Mise en place du listener sur le boutton prévisionelle ou reel
+        previsionnelOrReel.setOnCheckedChangeListener { _, isChecked ->
             if (workingDay != null) {
                 if (isChecked) {
                     setValueOfSpinnerByCode(workingDay!!.realWorking)
@@ -101,7 +87,7 @@ class AddCodeToPlanningFragment : DialogFragment() {
     }
 
     private fun getViewElements(view : View) {
-        choixJournee = view.findViewById<EditText>(R.id.editTextJournee);
+        choixJournee = view.findViewById(R.id.editTextJournee)
         spinnerCodeAffectation = view.findViewById<View>(R.id.spinnerSelectCodeForAdd) as Spinner
         previsionnelOrReel = view.findViewById(R.id.previsionnelOrReel)
         previsionnelOrReel.visibility = View.INVISIBLE
@@ -109,35 +95,29 @@ class AddCodeToPlanningFragment : DialogFragment() {
         cancelButton = view.findViewById(R.id.cancel_btn)
     }
 
-    @SuppressLint("SetTextI18n")
     private fun updateTextAndSetCurrentWorkingDay() {
-        val myFormat = "dd/MM/yyyy" //In which you need put here
-
-        val sdf = SimpleDateFormat(myFormat, Locale.FRANCE)
-
-        val value = myCalendar.time
-
-        val dateStringSelected = sdf.format(value)
-
-        val dateSelected = sdf.parse(dateStringSelected)
-
+        val dateStringSelected = getFormattedDate(myCalendar.time)
         editTextJournee.setText(dateStringSelected)
-
+        //Récupération de l'objet de la BDD
         val mWorkingDayViewModel = ViewModelProvider(this).get(WorkingDayViewModel::class.java)
-        mWorkingDayViewModel.getWorkCodeForWorkDay(dateSelected!!).observe(this, { data ->
-            data.let {
-                if(data.isNotEmpty()){
-                    workingDay = data[0].workingDay
-                    confirmAddCodeToPlanning.text = "Mettre à jour"
-                    previsionnelOrReel.visibility = View.VISIBLE
-                    setValueOfSpinnerByCode(workingDay!!.prevWorkCode)
-                }else{
-                    workingDay = null
-                    confirmAddCodeToPlanning.text = "Ajouter"
-                    previsionnelOrReel.visibility = View.INVISIBLE
+        stringToDate(dateStringSelected)?.let {
+            mWorkingDayViewModel.getWorkCodeForWorkDay(it).observe(this, { data ->
+                data.let {
+                    //Si il n'est pas vide la donnée existe il faut la mettre à jour
+                    if(data.isNotEmpty()){
+                        workingDay = data[0].workingDay
+                        confirmAddCodeToPlanning.text = getString(R.string.update)
+                        previsionnelOrReel.visibility = View.VISIBLE
+                        setValueOfSpinnerByCode(workingDay!!.prevWorkCode)
+                    //Si non pas de nouvelle données il faut ajouter
+                    }else{
+                        workingDay = null
+                        confirmAddCodeToPlanning.text = getString(R.string.add)
+                        previsionnelOrReel.visibility = View.INVISIBLE
+                    }
                 }
-            }
-        })
+            })
+        }
     }
 
     private fun setValueOfSpinnerByCode(code:String?) {
@@ -190,7 +170,7 @@ class AddCodeToPlanningFragment : DialogFragment() {
         }
     }
 
-    fun setValuesOfSpinner(view: View){
+    private fun setValuesOfSpinner(view: View){
         val mWorkCodeViewModel = ViewModelProvider(this).get(WorkCodeViewModel::class.java)
 
         mWorkCodeViewModel.getCodeList().observe(this, { data ->
@@ -199,8 +179,8 @@ class AddCodeToPlanningFragment : DialogFragment() {
                 listCodeAffectation = data
                 spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 spinnerCodeAffectation.adapter = spinnerAdapter
-                spinnerAdapter.addAll();
-                spinnerAdapter.notifyDataSetChanged();
+                spinnerAdapter.addAll()
+                spinnerAdapter.notifyDataSetChanged()
             }
         })
     }

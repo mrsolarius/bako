@@ -1,6 +1,5 @@
-package app.bako.view.navigation.popup
+package app.bako.view.settings.workcode.popup
 
-import android.annotation.SuppressLint
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,15 +14,17 @@ import androidx.lifecycle.ViewModelProvider
 import app.bako.R
 import app.bako.model.workcode.WorkCode
 import app.bako.model.workcode.WorkCodeViewModel
+import app.bako.utils.DateFormat.Companion.hourToString
+import app.bako.utils.DateFormat.Companion.stringToHour
 import com.flask.colorpicker.ColorPickerView
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.synthetic.main.popup_manage_workcode.*
-import java.text.SimpleDateFormat
 import java.util.*
 
-
-class AddWorkCodePopup() : DialogFragment() {
+/**
+ * AddWorkCodePopup
+ * Popup d'ajout des code de travail
+ */
+class AddWorkCodePopup : DialogFragment() {
     private var workCode: WorkCode? = null
 
     private lateinit var editTextCode: TextView
@@ -44,10 +45,11 @@ class AddWorkCodePopup() : DialogFragment() {
 
         setViews(view)
 
+        //récupération du bundle de données si click sur le button edition dans le workCodeAdapter
         val bundle: Bundle? = arguments
         if (bundle != null) {
             if (bundle.containsKey("workCode")) {
-                workCode = bundle.getParcelable<WorkCode>("workCode")
+                workCode = bundle.getParcelable("workCode")
                 setElementValuesWithWorkCode()
             }
         }
@@ -59,6 +61,7 @@ class AddWorkCodePopup() : DialogFragment() {
 
         setColorPickerOnClick()
 
+        //fermeture sur le click du button cancel
         cancelEdition.setOnClickListener {
             dismiss()
         }
@@ -69,93 +72,75 @@ class AddWorkCodePopup() : DialogFragment() {
 
     override fun onStart() {
         super.onStart()
+        //Redefinition de la taille de la fenêtre à 95% de la largeur
         val width = (resources.displayMetrics.widthPixels * 0.95).toInt()
-        val height = (resources.displayMetrics.heightPixels * 0.30).toInt()
         dialog!!.window!!.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
-        //THIS WILL MAKE WIDTH 90% OF SCREEN
-        //HEIGHT WILL BE WRAP_CONTENT
-        //getDialog().getWindow().setLayout(width, height);
     }
 
-    @SuppressLint("SetTextI18n", "ClickableViewAccessibility")
+
+    private fun setClickListener(registeredView : TextView){
+        registeredView.setOnTouchListener { _, motionEvent ->
+            if(motionEvent.action==MotionEvent.ACTION_DOWN) {
+                val currentTime = Calendar.getInstance()
+                val hour = currentTime[Calendar.HOUR_OF_DAY]
+                val minute = currentTime[Calendar.MINUTE]
+                val mTimePicker = TimePickerDialog(
+                    context,
+                    { _, selectedHour, selectedMinute -> registeredView.text = "$selectedHour:$selectedMinute" },
+                    hour,
+                    minute,
+                    true
+                )
+                mTimePicker.show()
+            }
+            true
+        }
+    }
+
     private fun setTimePickerOnClick() {
-        editHeureDebut.setOnTouchListener { view, motionEvent ->
-            if(motionEvent.action==MotionEvent.ACTION_DOWN) {
-                val mcurrentTime = Calendar.getInstance()
-                val hour = mcurrentTime[Calendar.HOUR_OF_DAY]
-                val minute = mcurrentTime[Calendar.MINUTE]
-                val mTimePicker = TimePickerDialog(
-                    context,
-                    { timePicker, selectedHour, selectedMinute -> editHeureDebut.setText("$selectedHour:$selectedMinute") },
-                    hour,
-                    minute,
-                    true
-                ) //Yes 24 hour time
-                mTimePicker.setTitle("Select Time")
-                mTimePicker.show()
-            }
-            true
-        }
-
-        editHeureFin.setOnTouchListener { view, motionEvent ->
-            if(motionEvent.action==MotionEvent.ACTION_DOWN) {
-                val mcurrentTime = Calendar.getInstance()
-                val hour = mcurrentTime[Calendar.HOUR_OF_DAY]
-                val minute = mcurrentTime[Calendar.MINUTE]
-                val mTimePicker = TimePickerDialog(
-                    context,
-                    { timePicker, selectedHour, selectedMinute -> editHeureFin.setText("$selectedHour:$selectedMinute") },
-                    hour,
-                    minute,
-                    true
-                ) //Yes 24 hour time
-                mTimePicker.setTitle("Select Time")
-                mTimePicker.show()
-            }
-            true
-        }
+        //setup picker dialog
+        setClickListener(editHeureDebut)
+        setClickListener(editHeureFin)
     }
 
+    /**
+     * Initialisation des code si grace au bundle si edition
+     */
     private fun setElementValuesWithWorkCode() {
         validateEdition.text = resources.getString(R.string.update)
-        editTextCode.setText(workCode!!.code)
-        setDate(workCode!!.startHour, editHeureDebut)
-        setDate(workCode!!.endHour, editHeureFin)
+        editTextCode.text = workCode!!.code
+        editHeureDebut.text = hourToString(workCode!!.startHour)
+        editHeureFin.text = hourToString(workCode!!.endHour)
         colorPicker.setBackgroundColor(workCode!!.color)
     }
 
-    @SuppressLint("SimpleDateFormat")
-    fun setDate(date: Date, view: TextView) { //getting date
-        val formatter = SimpleDateFormat("HH:mm") //formating according to my need
-        val dateStr: String = formatter.format(date)
-        view.text = dateStr
-    }
-
+    /**
+     * Appelais lorsque l'on ajout la validation
+     */
     private fun setButtonAddOrUpdate() {
         validateEdition.setOnClickListener{
-
             if(isCorrect()) {
                 val newWorkCode = editTextCode.text.toString()
-                val newHeureDebut = strToHour(editHeureDebut.text.toString())
-                val newHeureFin = strToHour(editHeureFin.text.toString())
-                val viewColor = colorPicker.background
+                val newHeureDebut = stringToHour(editHeureDebut.text.toString())
+                val newHeureFin = stringToHour(editHeureFin.text.toString())
                 //sauvegarde de l'objet
                 val mWorkCodeViewModel = ViewModelProvider(this).get(WorkCodeViewModel::class.java)
                 if (workCode == null) {
+                    //création du code de travail
                     workCode = newHeureDebut?.let { it1 ->
                         newHeureFin?.let { it2 ->
                             WorkCode(
-                                newWorkCode as String, color,
+                                newWorkCode, color,
                                 it1, it2
                             )
                         }
                     }
 
-
+                    //ajout du code de travail à la BDD
                     mWorkCodeViewModel.addWorkCode(workCode!!)
 
                 } else {
-                    workCode!!.code = newWorkCode.toString()
+                    workCode!!.code = newWorkCode
                     workCode!!.color = color
                     if (newHeureDebut != null) {
                         workCode!!.startHour = newHeureDebut
@@ -163,6 +148,7 @@ class AddWorkCodePopup() : DialogFragment() {
                     if (newHeureFin != null) {
                         workCode!!.endHour = newHeureFin
                     }
+                    //Mise à jour du code de travail
                     mWorkCodeViewModel.updateWorkCode(workCode!!)
                 }
 
@@ -172,14 +158,8 @@ class AddWorkCodePopup() : DialogFragment() {
     }
 
     private fun isCorrect(): Boolean {
-//        val viewColor = colorPicker.background as ColorDrawable
-//        val colorId = viewColor.color
+        //Verification de la validité du formulaire
         return !(editTextCode.text.isEmpty() && editHeureFin.text.isEmpty() && editHeureDebut.text.isEmpty())
-    }
-
-    fun strToHour(strToConvert: String): Date? {
-        val formatter = SimpleDateFormat("HH:mm", Locale.FRANCE)
-        return formatter.parse(strToConvert)
     }
 
     private fun setColorPickerOnClick() {
@@ -198,11 +178,12 @@ class AddWorkCodePopup() : DialogFragment() {
                         ), Toast.LENGTH_SHORT
                     ).show()
                 }
-                .setPositiveButton("ok") { dialog, selectedColor, allColors -> changeBackgroundColor(
+                //changement de couleur de fond en fonction de la couleur
+                .setPositiveButton("ok") { _, selectedColor, _ -> changeBackgroundColor(
                     selectedColor
                 )
                 }
-                .setNegativeButton("cancel") { dialog, which ->
+                .setNegativeButton("cancel") { _, _ ->
 
                 }
                 .build()

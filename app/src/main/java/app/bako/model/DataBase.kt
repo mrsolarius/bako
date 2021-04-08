@@ -14,10 +14,13 @@ import app.bako.model.workingday.WorkingDayDao
 import app.bako.model.year.Year
 import app.bako.model.year.YearDao
 
+//Déclaration des table de la BDD
 @Database(entities = [WorkCode::class, DayOffCode::class, WorkingDay::class, Year::class], version = 4, exportSchema = false)
+//Déclaration de la classe de conversion
 @TypeConverters(Converters::class)
 abstract class DataBase: RoomDatabase() {
 
+    //Déclaration des DAO
     abstract fun WorkCodeDao(): WorkCodeDao
     abstract fun DayOffCodeDao(): DayOffCodeDao
     abstract fun WorkingDayDao(): WorkingDayDao
@@ -26,7 +29,7 @@ abstract class DataBase: RoomDatabase() {
     companion object {
         @Volatile
         private var INSTANCE: DataBase? = null
-
+        //methode static pour récupérer l'instance de la BDD
         fun getDatabase(context: Context): DataBase {
             val tempInstance = INSTANCE
             if(tempInstance != null){

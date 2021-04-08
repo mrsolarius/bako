@@ -1,16 +1,16 @@
 package app.bako.view.navigation.fragment.calendar.plannig
 
-import android.graphics.ColorFilter
-import android.graphics.LightingColorFilter
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import app.bako.R
 import app.bako.model.relation.WorkingDayWithWorkCodes
-import app.bako.view.navigation.fragment.calendar.utils.dateFormat.Companion.getFormattedDay
-import app.bako.view.navigation.fragment.calendar.utils.dateFormat.Companion.getFormattedTime
+import app.bako.utils.DateFormat.Companion.getFormattedDay
+import app.bako.utils.DateFormat.Companion.getFormattedTime
+import app.bako.utils.UiUtils.Companion.getCustomDrawable
+import app.bako.utils.UiUtils.Companion.isColorDark
 import kotlinx.android.synthetic.main.calendar_row.view.*
 
 
@@ -41,25 +41,38 @@ class CalendarRecyclerAdapter(var context: CalendarFragment) :
     class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
 
         fun bind(workingDay: WorkingDayWithWorkCodes){
-            val realWorkBG = ContextCompat.getDrawable(itemView.context, R.drawable.layout_bg)
-            val realWorkFilter: ColorFilter = LightingColorFilter(workingDay.realWorkCode.color, workingDay.realWorkCode.color)
-            realWorkBG!!.colorFilter = realWorkFilter
+            itemView.date_text.text = getFormattedDay(workingDay.workingDay.date)
 
-            val prevWorkBG = ContextCompat.getDrawable(itemView.context, R.drawable.layout_bg)
-            val prevWorkFilter: ColorFilter = LightingColorFilter(workingDay.prevWorkCode.color, workingDay.prevWorkCode.color)
-            prevWorkBG!!.colorFilter = prevWorkFilter
-
-            itemView.date_text.text = getFormattedDay(workingDay.workingDay.date);
-
-            itemView.real_work_code.text = workingDay.realWorkCode.code;
+            itemView.real_work_code.text = workingDay.realWorkCode.code
             itemView.real_work_hours.text = getFormattedTime(workingDay.realWorkCode)
-            itemView.real_work_layout.background = realWorkBG
+            itemView.real_work_layout.background = getCustomDrawable(workingDay.realWorkCode.color,itemView.context)
+            if (isColorDark(workingDay.realWorkCode.color)) {
+                itemView.real_work_code.setTextColor(Color.WHITE)
+                itemView.real_work_hours.setTextColor(Color.WHITE)
+                itemView.real.setTextColor(Color.WHITE)
+            }
+            else{
+                itemView.real_work_code.setTextColor(Color.BLACK)
+                itemView.real_work_hours.setTextColor(Color.BLACK)
+                itemView.real.setTextColor(Color.BLACK)
+            }
 
-            itemView.prev_work_code.text = workingDay.prevWorkCode.code;
-            itemView.prev_work_hours.text = getFormattedTime(workingDay.prevWorkCode);
-            itemView.prev_work_layout.background = prevWorkBG
 
+            itemView.prev_work_code.text = workingDay.prevWorkCode.code
+            itemView.prev_work_hours.text = getFormattedTime(workingDay.prevWorkCode)
+            itemView.prev_work_layout.background = getCustomDrawable(workingDay.prevWorkCode.color,itemView.context)
+            if (isColorDark(workingDay.prevWorkCode.color)) {
+                itemView.prev_work_code.setTextColor(Color.WHITE)
+                itemView.prev_work_hours.setTextColor(Color.WHITE)
+                itemView.prev.setTextColor(Color.WHITE)
+            }else {
+                itemView.prev_work_code.setTextColor(Color.BLACK)
+                itemView.prev_work_hours.setTextColor(Color.BLACK)
+                itemView.prev.setTextColor(Color.BLACK)
+            }
         }
+
+
 
 
     }

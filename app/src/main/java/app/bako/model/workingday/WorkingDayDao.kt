@@ -7,6 +7,9 @@ import app.bako.model.workcode.WorkCode
 import kotlinx.coroutines.flow.Flow
 import java.util.*
 
+/**
+ * SQL Query For WorkingDayDao
+ */
 @Dao
 interface WorkingDayDao {
 

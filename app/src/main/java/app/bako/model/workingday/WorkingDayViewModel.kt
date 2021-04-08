@@ -11,6 +11,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
 
+/**
+ * Working Day Model
+ */
 class WorkingDayViewModel(application: Application): AndroidViewModel(application) {
 
     val readAllData: LiveData<List<WorkingDay>>

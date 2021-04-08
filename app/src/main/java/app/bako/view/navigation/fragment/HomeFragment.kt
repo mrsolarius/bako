@@ -1,37 +1,23 @@
 package app.bako.view.navigation.fragment
 
-import android.annotation.SuppressLint
-import android.graphics.Color
-import android.graphics.DashPathEffect
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import app.bako.R
-import app.bako.model.workcode.WorkCodeViewModel
 import app.bako.model.workingday.WorkingDayViewModel
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Legend.LegendForm
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.formatter.IFillFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
-import com.github.mikephil.charting.utils.Utils
 
-
-// TODO: Rename parameter arguments, choose names that match
-
-/**
- * A simple [Fragment] subclass.
- */
 class HomeFragment : Fragment() {
 
-    lateinit var chart: LineChart
-    private lateinit var mWorkingDayViewModel: WorkingDayViewModel
+    private lateinit var chart: LineChart
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -39,89 +25,87 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home, container, false)
-        chart = view.findViewById<LineChart>(R.id.chartNbHeureAnnee)
+        chart = view.findViewById(R.id.chartNbHeureAnnee)
 
-        chart.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark))
+        chart.setBackgroundColor(resources.getColor(R.color.colorPrimaryDark))
         resources
-        chart.xAxis.textColor = getResources().getColor(R.color.colorAccent)
-        chart.axisLeft.textColor = getResources().getColor(R.color.colorAccent)
+        chart.xAxis.textColor = resources.getColor(R.color.colorAccent)
+        chart.axisLeft.textColor = resources.getColor(R.color.colorAccent)
         chart.axisRight.isEnabled = false
 
-        chart.setDrawGridBackground(false);
-        chart.getDescription().setEnabled(false);
-        chart.setDrawBorders(false);
+        chart.setDrawGridBackground(false)
+        chart.description.isEnabled = false
+        chart.setDrawBorders(false)
 
-        chart.setTouchEnabled(false);
-        chart.setDragEnabled(false);
-        chart.setScaleEnabled(false);
-        chart.legend.textColor = getResources().getColor(R.color.colorAccent)
+        chart.setTouchEnabled(false)
+        chart.isDragEnabled = false
+        chart.setScaleEnabled(false)
+        chart.legend.textColor = resources.getColor(R.color.colorAccent)
 
-
+        //récupération des données de la BDD
         val mWorkingDayRepository = ViewModelProvider(this).get(WorkingDayViewModel::class.java)
         mWorkingDayRepository.getAllWorkingDayWithWorkCode().observe(viewLifecycleOwner, { workingDay ->
-            workingDay.let {
-                var hours: ArrayList<Int> = ArrayList()
-                var totalHours = 0;
+            workingDay.let { it ->
+                val hours: ArrayList<Int> = ArrayList()
+                var totalHours = 0
+                //parcour des données
                 it.forEach {
+                    //ajout des heures
                     val hour = ((it.realWorkCode.endHour.time - it.realWorkCode.startHour.time)/1000/60/60).toInt()
                     totalHours += hour
                     hours.add(totalHours)
                 }
-                setData(view, hours)
+                setData(hours)
                 chart.notifyDataSetChanged()
-                chart.animateX(300);
+                chart.animateX(500)
             }
         })
 
         val l = chart.legend
-
-        // draw legend entries as lines
-
-        // draw legend entries as lines
+        //Écriture de la légende
         l.form = LegendForm.LINE
         return view
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
-    private fun setData(vue: View, value: ArrayList<Int>) {
+    private fun setData(value: ArrayList<Int>) {
         val values: ArrayList<Entry> = ArrayList()
         var position = 0
         for (i in value) {
-            values.add(Entry(position.toFloat(), i.toFloat(), resources.getDrawable(R.drawable.star)))
+            values.add(Entry(position.toFloat(), i.toFloat(), R.drawable.layout_bg))
             position+=1
         }
         val set1: LineDataSet
-        if (chart.getData() != null &&
-                chart.getData().getDataSetCount() > 0) {
-            set1 = chart.getData().getDataSetByIndex(0) as LineDataSet
-            set1.setValues(values)
+        if (chart.data != null &&
+                chart.data.dataSetCount > 0) {
+            set1 = chart.data.getDataSetByIndex(0) as LineDataSet
+            set1.values = values
             set1.notifyDataSetChanged()
-            chart.getData().notifyDataChanged()
+            chart.data.notifyDataChanged()
             chart.notifyDataSetChanged()
         } else {
-            // create a dataset and give it a type
+            // Création de datatype et mise en place du type
             set1 = LineDataSet(values, "")
             set1.setDrawIcons(false)
             set1.setDrawValues(false)
 
-            set1.color = getResources().getColor(R.color.colorAccent)
+            set1.color = resources.getColor(R.color.colorAccent)
             set1.setDrawCircles(false)
 
-            // line thickness and point size
+            // mise en place du style des lignes
             set1.lineWidth = 3f
             set1.circleRadius = 0f
 
-            set1.setLabel("Heure de travail");
+            set1.label = "Heure de travail"
 
 
             val dataSets: ArrayList<ILineDataSet> = ArrayList()
-            dataSets.add(set1) // add the data sets
+            dataSets.add(set1) // ajout de la donnée au dataset
 
-            // create a data object with the data sets
+            // creation de l'objet de data avec le dataset
             val data = LineData(dataSets)
 
             // set data
-            chart.setData(data)
+            chart.data = data
         }
     }
 

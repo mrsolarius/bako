@@ -20,14 +20,15 @@ class ManagerWorkCodeOfCalendarFragment : Fragment(){
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    ): View {
+
         val view: View = inflater.inflate(R.layout.fragment_add_code_to_planning, container, false)
 
         openOrCloseManager = view.findViewById<FloatingActionButton>(R.id.openCloseManagementWorkCodeOfCalendar)
         addCodeToPlanning = view.findViewById(R.id.addWorkCodeOfCalendar)
         updateCodeOfPlanning = view.findViewById(R.id.updateWorkCodeOfCalendar)
 
+        //Evenement de clique sur le premier fab
         openOrCloseManager.setOnClickListener{
             if(isOpen){
                 closeMenu()
@@ -36,15 +37,17 @@ class ManagerWorkCodeOfCalendarFragment : Fragment(){
             }
         }
 
+        //ouverture de la popup d'ajout / d'édition sur le clique du boutton
         addCodeToPlanning.setOnClickListener{
             val fm: FragmentManager = parentFragmentManager
-            val editNameDialogFragment: AddCodeToPlanningFragment = AddCodeToPlanningFragment()
+            val editNameDialogFragment = AddCodeToPlanningFragment()
             editNameDialogFragment.show(fm, "fragment_add_code_plann")
         }
 
         return view
     }
 
+    //Fonction pour ouvrire le menu des fab
     private fun openMenu() {
         openOrCloseManager.setImageResource(R.drawable.ic_baseline_close_24)
         addCodeToPlanning.visibility = View.VISIBLE
@@ -52,6 +55,7 @@ class ManagerWorkCodeOfCalendarFragment : Fragment(){
         isOpen = true
     }
 
+    //fonction pour fermer le menu de fab
     private fun closeMenu() {
         openOrCloseManager.setImageResource(R.drawable.ic_baseline_add_24)
         addCodeToPlanning.visibility = View.INVISIBLE

@@ -16,18 +16,18 @@ import kotlinx.android.synthetic.main.main_activity.*
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var toggle: ActionBarDrawerToggle
+    private lateinit var toggle: ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
-
-//        val toolbar = findViewById<Toolbar>(R.id.)
-
+        //récupération du drawer
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
+        //Mise en place du button burger
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        //Mise en place des évènement sur le panning
         topNavView.setNavigationItemSelectedListener {
             when(it.itemId) {
                 R.id.calendar_month -> Toast.makeText(this, "Month", Toast.LENGTH_SHORT).show()
@@ -41,12 +41,13 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+        //Initialisation des 3 fragment du menu principal
         val homeFragment = HomeFragment()
         val calendarFragment = CalendarFragment()
         val alarmFragment = AlarmFragment()
-
-        this.makeCurrentFragment(calendarFragment);
-
+        //Mise en place du calendrier comme fragment part default
+        this.makeCurrentFragment(calendarFragment)
+        //mise en place du listener de navigation
         bottom_navigation.setOnNavigationItemSelectedListener {
             when (it.itemId){
                 R.id.ic_home -> this.makeCurrentFragment(homeFragment)
@@ -57,7 +58,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun makeCurrentFragment(fragment: Fragment){
+    //fonction de replacement du fragment actuel par un nouveau
+    private fun makeCurrentFragment(fragment: Fragment){
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fl_wrapper, fragment)
             commit()
@@ -65,6 +67,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        //prise en charge du clique sur le burger pour afficher le drawer
         if(toggle.onOptionsItemSelected(item)) {
             return true
         }

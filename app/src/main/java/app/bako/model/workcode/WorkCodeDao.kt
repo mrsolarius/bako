@@ -4,6 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
+/*
+ * Work Code SQL Query
+ * C'est l'interface qui détermine la composition des query
+ */
 @Dao
 interface WorkCodeDao {
 

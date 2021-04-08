@@ -7,6 +7,9 @@ import androidx.room.Relation
 import app.bako.model.workcode.WorkCode
 import java.util.*
 
+/**
+ * Table WorkingDay
+ */
 @Entity(tableName = "workingday")
 data class WorkingDay(
         @PrimaryKey(autoGenerate = false) var date: Date

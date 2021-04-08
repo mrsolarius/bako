@@ -5,6 +5,9 @@ import app.bako.model.relation.WorkingDayWithWorkCodes
 import kotlinx.coroutines.flow.Flow
 import java.util.*
 
+/**
+ * Useful Methode for working fay repository
+ */
 class WorkingDayRepository(private val workingDayDao: WorkingDayDao) {
 
     val readAllData: LiveData<List<WorkingDay>> = workingDayDao.readAllData()
