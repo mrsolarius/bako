@@ -1,4 +1,4 @@
-package app.bako.adapter.WorkCodeAdapter.kt
+package app.bako.view.settings.workcode
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -7,15 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import app.bako.R
 import app.bako.model.workcode.WorkCode
 import app.bako.view.navigation.MainActivity
-import app.bako.view.navigation.popup.AddWorkCodePopup
+import app.bako.view.settings.workcode.popup.AddWorkCodePopup
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.parcel.Parcelize
 import java.text.SimpleDateFormat
 import java.util.*
+import androidx.appcompat.app.AppCompatActivity
+
+
+
 
 class WorkCodeAdapter(var context: Context) :
     RecyclerView.Adapter<WorkCodeAdapter.ExampleViewHolder>() {
@@ -55,9 +59,8 @@ class WorkCodeAdapter(var context: Context) :
             val bundle = Bundle()
             bundle.putParcelable("workCode", currentWorkCode)
             addWorkCodePopup.arguments = bundle
-
-            val activityObject: MainActivity = context as MainActivity
-            activityObject.makeCurrentFragment(addWorkCodePopup)
+            val fm: FragmentManager = (context as AppCompatActivity).supportFragmentManager
+            addWorkCodePopup.show(fm,"edit_fragment")
         }
     }
 

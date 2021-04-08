@@ -7,7 +7,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent" android:padding="10dp"
-            android:background="@drawable/layout_bg_deep_gray">
+            android:background="@drawable/layout_bg">
         <TextView
                 android:text="1er\nJan"
                 android:layout_width="40dp"

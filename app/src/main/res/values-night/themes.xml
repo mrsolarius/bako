@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.Bako" parent="Theme.MaterialComponents">
-        <item name="colorPrimary">@color/colorDarkPrimary</item>
-        <item name="colorPrimaryDark">@color/colorDarkPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccentDark</item>
         <item name="android:textColorPrimary">@color/textColor</item>
-        <item name="android:windowBackground">@color/black</item>
+        <item name="android:windowBackground">#000000</item>
         <item name="android:textColor">@color/textColor</item>
-        <item name="colorBackgroundFloating">@color/colorDarkPrimary</item>
-        <item name="android:colorBackgroundFloating">@color/colorDarkPrimary</item>
-        <item name="colorLeftMenu">@color/textColor</item>
-        <item name="containerBorder">@drawable/layout_bg_deep_gray</item>
+        <item name="android:colorBackgroundFloating">@color/colorPrimary</item>
         <item name="android:navigationBarColor">@color/black</item>
+        <item name="android:timePickerDialogTheme">@style/AlertDialogCustom</item>
+        <item name="android:datePickerDialogTheme">@style/AlertDialogCustom</item>
+        <item name="android:alertDialogTheme">@style/AlertDialogCustom</item>
+    </style>
+
+    <style name="AlertDialogCustom" parent="android:Theme.Material.Dialog.Alert">
+        <item name="android:colorPrimary">@color/colorPrimary</item>
+        <item name="android:colorAccent">@color/colorAccent</item>
     </style>
 </resources>

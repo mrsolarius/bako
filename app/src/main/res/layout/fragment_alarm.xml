@@ -9,7 +9,7 @@
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:background="?attr/containerBorder"
+            android:layout_height="wrap_content" android:background="@drawable/layout_bg"
             android:padding="10dp" android:layout_margin="30dp">
         <TextView
                 android:id="@+id/textViewNextWakeUp"
@@ -36,7 +36,7 @@
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="150dp"
-                android:layout_height="150dp" android:background="?containerBorder"
+                android:layout_height="150dp" android:background="@drawable/layout_bg"
                 android:layout_marginStart="40dp" android:padding="10dp">
             <TextView
                     android:id="@+id/textViewPreparationTimeTitle"
@@ -65,7 +65,7 @@
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="150dp"
-                android:layout_height="150dp" android:background="?attr/containerBorder"
+                android:layout_height="150dp" android:background="@drawable/layout_bg"
                 android:layout_marginEnd="40dp" android:padding="10dp">
             <TextView
                     android:id="@+id/textViewTravelTimeTitle"
@@ -93,7 +93,7 @@
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:background="?attr/containerBorder"
+            android:layout_height="wrap_content" android:background="@drawable/layout_bg"
             android:padding="30dp" android:layout_marginTop="60dp" android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp">
         <Switch

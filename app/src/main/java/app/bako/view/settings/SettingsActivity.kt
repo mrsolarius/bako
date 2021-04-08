@@ -1,21 +1,18 @@
 package app.bako.view.settings
 
-import android.app.Application
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceFragmentCompat
 import app.bako.R
-import androidx.core.app.NavUtils
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.preference.Preference
-import app.bako.view.navigation.MainActivity
-import app.bako.view.navigation.fragment.CodesListFragment
-import java.lang.reflect.Array.newInstance
+import android.content.SharedPreferences
+import androidx.preference.PreferenceManager
+import app.bako.view.settings.workcode.CodesListActivity
 
 
 class SettingsActivity : AppCompatActivity() {
@@ -28,7 +25,6 @@ class SettingsActivity : AppCompatActivity() {
             .replace(R.id.settings, SettingsFragment())
             .commit()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -57,19 +53,24 @@ class SettingsActivity : AppCompatActivity() {
             }
 
             if (key.equals("themeSwitch")){
-                when (preference?.isEnabled ){
+
+                val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity)
+                var editor = prefs.getBoolean(key, true)
+
+                when (editor){
                     true -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                     false -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 }
+                Log.i("TAG", "onPreferenceTreeClick: "+editor)
             }
 
             return super.onPreferenceTreeClick(preference)
         }
 
         fun showSettingDialog(){
-            val fm: FragmentManager = this.parentFragmentManager
-            val editNameDialogFragment: CodesListFragment = CodesListFragment()
-            editNameDialogFragment.show(fm, "fragment_edit_name")
+            val intent = Intent(activity, CodesListActivity::class.java)
+            startActivity(intent)
+
         }
     }
 }
