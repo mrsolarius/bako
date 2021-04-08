@@ -1,12 +1,17 @@
 package app.bako.view.navigation.fragment
 
 import android.annotation.SuppressLint
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.app.TimePickerDialog
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.icu.util.Calendar
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +28,7 @@ import kotlinx.android.synthetic.main.fragment_alarm.*
  */
 class AlarmFragment : Fragment() {
 
-    private var wakeUpTime = 8*60 + 0 // heure supposée de début de travail en minutes
+    private var wakeUpTime = 16*60 + 28// heure supposée de début de travail en minutes
     private var preparationTime = 0
     private var travelTime = 0
     private var totalTime = 0
@@ -89,8 +94,6 @@ class AlarmFragment : Fragment() {
 
             setNextWakeUpTime()
 
-            Toast.makeText(context, text, Toast.LENGTH_LONG).show()
-
         }), hour, minute, true)
 
         tpd.show()
@@ -103,10 +106,11 @@ class AlarmFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun setNextWakeUpTime()
     {
-        var retour = wakeUpTime - sharedPref.getInt("preparationTime", 0) - sharedPref.getInt("travelTime", 0)
+        var nextWakeUpTime = wakeUpTime - sharedPref.getInt("preparationTime", 0) - sharedPref.getInt("travelTime", 0)
 
-        saveSharedPreference("totalTime", retour)
-        editTextTimeTotal.setText("${retour / 60} : ${retour % 60}")
+        saveSharedPreference("totalTime", nextWakeUpTime)
+        editTextTimeTotal.setText("${nextWakeUpTime / 60} : ${nextWakeUpTime % 60}")
+        setAlarm(totalTime)
     }
 
     /**
@@ -119,5 +123,32 @@ class AlarmFragment : Fragment() {
 
         editor.putInt(KEY_NAME, value)
         editor.apply()
+    }
+
+    /**
+     * Mise en place d'une alarme en fonction du temps du editTextTimeTotal
+     */
+    private fun setAlarm(timeInMillis: Int) {
+        val intent = Intent(context, MyAlarm::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
+        val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        alarmManager.set(
+                AlarmManager.RTC_WAKEUP,
+                System.currentTimeMillis() + (10*1000),
+                pendingIntent
+        )
+
+        Toast.makeText(context, "Alarm is set", Toast.LENGTH_SHORT).show()
+    }
+
+    /**
+     * Classe alarme
+     */
+    class MyAlarm : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            Toast.makeText(context, "Alarm Bell RECEIVED", Toast.LENGTH_SHORT).show()
+            Log.d("Alarm Bell", "RECEIVED")
+        }
     }
 }
