@@ -1,4 +1,4 @@
-package app.bako.view.navigation.popup
+package app.bako.view.settings.workcode.popup
 
 import android.annotation.SuppressLint
 import android.app.TimePickerDialog
@@ -12,17 +12,15 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import app.bako.R
 import app.bako.model.workcode.WorkCode
 import app.bako.model.workcode.WorkCodeViewModel
 import app.bako.view.navigation.MainActivity
-import app.bako.view.navigation.fragment.CodesListFragment
+import app.bako.view.settings.workcode.CodesListActivity
 import com.flask.colorpicker.ColorPickerView
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.synthetic.main.popup_manage_workcode.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -167,7 +165,7 @@ class AddWorkCodePopup() : DialogFragment() {
 
     private fun goToCodesListFragment() {
         val activityObject: MainActivity = activity as MainActivity
-        activityObject.makeCurrentFragment(CodesListFragment())
+        activityObject.makeCurrentFragment(CodesListActivity())
     }
 
     fun strToHour(strToConvert: String): Date? {

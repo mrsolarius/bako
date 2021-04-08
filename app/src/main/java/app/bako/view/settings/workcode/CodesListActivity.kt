@@ -1,9 +1,7 @@
-package app.bako.view.navigation.fragment
+package app.bako.view.settings.workcode
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,15 +12,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.bako.R
-import app.bako.adapter.WorkCodeAdapter.kt.WorkCodeAdapter
-import app.bako.model.workcode.WorkCode
 import app.bako.model.workcode.WorkCodeViewModel
-import app.bako.view.navigation.MainActivity
-import app.bako.view.navigation.popup.AddWorkCodePopup
-import java.util.*
+import app.bako.view.settings.workcode.popup.AddWorkCodePopup
 import kotlin.collections.ArrayList
 
-class CodesListFragment : DialogFragment() {
+class CodesListActivity : DialogFragment() {
     //Button of page
     private var addWorkCode:Button? = null
     private var addDayOffCode:Button? = null

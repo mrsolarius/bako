@@ -2,17 +2,13 @@ package app.bako.view.settings
 
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceFragmentCompat
 import app.bako.R
-import androidx.core.app.NavUtils
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.preference.Preference
-import app.bako.view.navigation.MainActivity
-import app.bako.view.navigation.fragment.CodesListFragment
-import java.lang.reflect.Array.newInstance
+import app.bako.view.settings.workcode.CodesListActivity
 
 
 class SettingsActivity : AppCompatActivity() {
@@ -55,8 +51,8 @@ class SettingsActivity : AppCompatActivity() {
 
         fun showSettingDialog(){
             val fm: FragmentManager = this.parentFragmentManager
-            val editNameDialogFragment: CodesListFragment = CodesListFragment()
-            editNameDialogFragment.show(fm, "fragment_edit_name")
+            val editNameDialogActivity: CodesListActivity = CodesListActivity()
+            editNameDialogActivity.show(fm, "fragment_edit_name")
         }
     }
 }

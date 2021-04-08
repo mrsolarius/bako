@@ -1,4 +1,4 @@
-package app.bako.adapter.WorkCodeAdapter.kt
+package app.bako.view.settings.workcode
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -11,9 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import app.bako.R
 import app.bako.model.workcode.WorkCode
 import app.bako.view.navigation.MainActivity
-import app.bako.view.navigation.popup.AddWorkCodePopup
+import app.bako.view.settings.workcode.popup.AddWorkCodePopup
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.parcel.Parcelize
 import java.text.SimpleDateFormat
 import java.util.*
 
