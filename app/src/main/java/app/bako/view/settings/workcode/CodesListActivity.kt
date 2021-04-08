@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.bako.R
 import app.bako.model.workcode.WorkCodeViewModel
-import app.bako.view.settings.workcode.popup.AddWorkCodePopup
+import app.bako.view.navigation.popup.AddWorkCodePopup
 import kotlin.collections.ArrayList
 
 class CodesListActivity : AppCompatActivity() {

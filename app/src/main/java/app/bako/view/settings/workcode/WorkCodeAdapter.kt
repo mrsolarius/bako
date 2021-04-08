@@ -10,9 +10,6 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import app.bako.model.workcode.WorkCode
-import app.bako.view.navigation.MainActivity
-import app.bako.view.settings.workcode.popup.AddWorkCodePopup
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.text.SimpleDateFormat
 import java.util.*
 import androidx.appcompat.app.AppCompatActivity
@@ -28,6 +25,7 @@ import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import app.bako.R
+import app.bako.view.navigation.popup.AddWorkCodePopup
 import kotlinx.android.synthetic.main.workcode_item.view.*
 
 

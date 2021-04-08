@@ -117,6 +117,7 @@ class AddWorkCodePopup() : DialogFragment() {
     }
 
     private fun setElementValuesWithWorkCode() {
+        validateEdition.text = resources.getString(R.string.update)
         editTextCode.setText(workCode!!.code)
         setDate(workCode!!.startHour, editHeureDebut)
         setDate(workCode!!.endHour, editHeureFin)
@@ -138,7 +139,8 @@ class AddWorkCodePopup() : DialogFragment() {
                 val newHeureDebut = strToHour(editHeureDebut.text.toString())
                 val newHeureFin = strToHour(editHeureFin.text.toString())
                 val viewColor = colorPicker.background
-
+                //sauvegarde de l'objet
+                val mWorkCodeViewModel = ViewModelProvider(this).get(WorkCodeViewModel::class.java)
                 if (workCode == null) {
                     workCode = newHeureDebut?.let { it1 ->
                         newHeureFin?.let { it2 ->
@@ -149,8 +151,7 @@ class AddWorkCodePopup() : DialogFragment() {
                         }
                     }
 
-                    //sauvegarde de l'objet
-                    val mWorkCodeViewModel = ViewModelProvider(this).get(WorkCodeViewModel::class.java)
+
                     mWorkCodeViewModel.addWorkCode(workCode!!)
 
                 } else {
@@ -162,6 +163,7 @@ class AddWorkCodePopup() : DialogFragment() {
                     if (newHeureFin != null) {
                         workCode!!.endHour = newHeureFin
                     }
+                    mWorkCodeViewModel.updateWorkCode(workCode!!)
                 }
 
                 dismiss()
