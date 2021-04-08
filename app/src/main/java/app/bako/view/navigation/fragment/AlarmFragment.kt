@@ -19,11 +19,9 @@ import android.widget.ImageButton
 import android.widget.Switch
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import app.bako.R
 import kotlinx.android.synthetic.main.fragment_alarm.*
-import kotlin.math.abs
 
 
 /**
@@ -50,7 +48,7 @@ class AlarmFragment : Fragment() {
         // Creation de ma sharedPreference
         sharedPref = requireActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
 
-        // On recupère les valeurs des sharedPreferences si elles existent sinon on set les valeurs à 0
+        // On récupère les valeurs des sharedPreferences si elles existent sinon on set les valeurs à 0
         preparationTime = sharedPref.getInt("preparationTime", 0)
         travelTime = sharedPref.getInt("travelTime", 0)
         totalTime = sharedPref.getInt("totalTime", 0)
@@ -73,7 +71,7 @@ class AlarmFragment : Fragment() {
 
         // Implémentation du switch pour activer le temps de préparation
         val switch1: Switch = view.findViewById<View>(R.id.switchPreparation) as Switch
-        switch1.setOnCheckedChangeListener { buttonView, isChecked ->
+        switch1.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) linearLayoutPreparation.visibility = View.VISIBLE else {
                 linearLayoutPreparation.visibility = View.INVISIBLE
                 saveSharedPreference("preparationTime", 0)
@@ -83,7 +81,7 @@ class AlarmFragment : Fragment() {
 
         // Implémentation du switch pour activer le temps de trajet
         val switch2: Switch = view.findViewById<View>(R.id.switchTravel) as Switch
-        switch2.setOnCheckedChangeListener { buttonView, isChecked ->
+        switch2.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) linearLayoutTravel.visibility = View.VISIBLE else {
                 linearLayoutTravel.visibility = View.INVISIBLE
                 saveSharedPreference("travelTime", 0)
@@ -104,7 +102,7 @@ class AlarmFragment : Fragment() {
         val hour = c.get(Calendar.HOUR)
         val minute = c.get(Calendar.MINUTE)
 
-        val tpd = TimePickerDialog(context, TimePickerDialog.OnTimeSetListener(function = { view, h, m ->
+        val tpd = TimePickerDialog(context, { _, h, m ->
 
             val text = "$h : $m"
             if (whichButton) {
@@ -117,7 +115,7 @@ class AlarmFragment : Fragment() {
 
             setNextWakeUpTime()
 
-        }), hour, minute, true)
+        }, hour, minute, true)
 
         tpd.show()
     }
@@ -129,7 +127,7 @@ class AlarmFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun setNextWakeUpTime()
     {
-        var nextWakeUpTime = wakeUpTime - sharedPref.getInt("preparationTime", 0) - sharedPref.getInt("travelTime", 0)
+        val nextWakeUpTime = wakeUpTime - sharedPref.getInt("preparationTime", 0) - sharedPref.getInt("travelTime", 0)
 
         saveSharedPreference("totalTime", nextWakeUpTime)
         editTextTimeTotal.setText("${nextWakeUpTime / 60} : ${nextWakeUpTime % 60}")
@@ -140,7 +138,7 @@ class AlarmFragment : Fragment() {
 
     /**
      * Sauvegarde des sharedPreferences
-     * @param KEY_NAME: String qui represente le nom de la sharedPreference
+     * @param KEY_NAME: String qui represent le nom de la sharedPreference
      * @param value: Int qui est la valeur à sauvegarder dans la sharedPreference
      */
     private fun saveSharedPreference(KEY_NAME: String, value: Int) {
@@ -160,7 +158,7 @@ class AlarmFragment : Fragment() {
 
         alarmManager.set(
                 AlarmManager.RTC_WAKEUP,
-                (10*1000), /// \todo Temps mis à 10s pour la démo, il faut le changer par System.currentTimeMillis() + abs( wakeUpTime*60*1000 - System.currentTimeMillis()*60*1000 )
+                (10*1000), //@todo Temps mis à 10s pour la démo, il faut le changer par System.currentTimeMillis() + abs( wakeUpTime*60*1000 - System.currentTimeMillis()*60*1000 )
                 pendingIntent
         )
 
@@ -168,7 +166,7 @@ class AlarmFragment : Fragment() {
     }
 
     /**
-     * Classe alarme qui implémente un toas et les vibrations
+     * Classe alarme qui implémente un toast et les vibrations
      */
     class MyAlarm : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
