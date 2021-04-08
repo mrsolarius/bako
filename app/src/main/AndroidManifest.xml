@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="app.bako">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="app.bako">
 
-    <uses-permission android:name="android.permission.VIBRATE"></uses-permission>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
             android:allowBackup="true"
@@ -20,7 +21,9 @@
                 android:name=".view.settings.workcode.CodesListActivity"
                 android:label="@string/title_activity_settings">
         </activity>
-        <activity android:name=".view.navigation.fragment.calendar.popup.AddCodeToPlanningFragment"></activity>
+        <activity
+            android:name=".view.navigation.fragment.calendar.popup.AddCodeToPlanningFragment"
+            tools:ignore="Instantiatable" />
         <activity android:name=".view.navigation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -29,7 +32,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".view.navigation.fragment.AlarmFragment$MyAlarm"></receiver>
+        <receiver android:name=".view.navigation.fragment.AlarmFragment$MyAlarm" />
     </application>
 
 </manifest>

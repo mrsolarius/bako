@@ -11,13 +11,15 @@ import android.content.SharedPreferences
 import android.icu.util.Calendar
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
+import android.os.Vibrator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.Switch
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import app.bako.R
 import kotlinx.android.synthetic.main.fragment_alarm.*
@@ -28,13 +30,14 @@ import kotlinx.android.synthetic.main.fragment_alarm.*
  */
 class AlarmFragment : Fragment() {
 
-    private var wakeUpTime = 16*60 + 28// heure supposée de début de travail en minutes
+    private var wakeUpTime = 8*60 + 0 // heure supposée de début de travail en minutes
     private var preparationTime = 0
     private var travelTime = 0
     private var totalTime = 0
 
     private lateinit var sharedPref: SharedPreferences
 
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -55,7 +58,7 @@ class AlarmFragment : Fragment() {
         val button: ImageButton = view.findViewById<View>(R.id.imageButtonPreparationTime) as ImageButton
         button.setOnClickListener { v ->
             if (v != null) {
-                clickTimePicker(v, true)
+                clickTimePicker(true)
             }
         }
 
@@ -63,7 +66,25 @@ class AlarmFragment : Fragment() {
         val button2: ImageButton = view.findViewById<View>(R.id.imageButtonTravelTime) as ImageButton
         button2.setOnClickListener { v ->
             if (v != null) {
-                clickTimePicker(v, false)
+                clickTimePicker(false)
+            }
+        }
+
+        val switch1: Switch = view.findViewById<View>(R.id.switchPreparation) as Switch
+        switch1.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) linearLayoutPreparation.visibility = View.VISIBLE else {
+                linearLayoutPreparation.visibility = View.INVISIBLE
+                saveSharedPreference("preparationTime", 0)
+                if (linearLayoutTravel.visibility == View.INVISIBLE) editTextTimeTotal.setText(" ") else setNextWakeUpTime()
+            }
+        }
+
+        val switch2: Switch = view.findViewById<View>(R.id.switchTravel) as Switch
+        switch2.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) linearLayoutTravel.visibility = View.VISIBLE else {
+                linearLayoutTravel.visibility = View.INVISIBLE
+                saveSharedPreference("travelTime", 0)
+                if (linearLayoutPreparation.visibility == View.INVISIBLE) editTextTimeTotal.setText(" ") else setNextWakeUpTime()
             }
         }
 
@@ -72,11 +93,10 @@ class AlarmFragment : Fragment() {
 
     /**
      * TimePicker pour choisir les temps de préparation et de trajet. Cela met automatiquement à jour le temps du prochain réveil
-     * @param view: View actuelle
      * @param whichButton: Boolean qui permet de choisir si on set le temps de trajet ou celui de préparation
      */
     @RequiresApi(Build.VERSION_CODES.N)
-    fun clickTimePicker(view: View, whichButton: Boolean) {
+    fun clickTimePicker(whichButton: Boolean) {
         val c = Calendar.getInstance()
         val hour = c.get(Calendar.HOUR)
         val minute = c.get(Calendar.MINUTE)
@@ -110,7 +130,9 @@ class AlarmFragment : Fragment() {
 
         saveSharedPreference("totalTime", nextWakeUpTime)
         editTextTimeTotal.setText("${nextWakeUpTime / 60} : ${nextWakeUpTime % 60}")
-        setAlarm(totalTime)
+
+        // Si l'un des deux temps est activé/configuré alors on active l'alarme sinon on la supprime des SharedPreferences
+        if (linearLayoutPreparation.visibility == View.VISIBLE || linearLayoutTravel.visibility == View.VISIBLE) setAlarm(totalTime) else sharedPref.edit().clear().apply()
     }
 
     /**
@@ -139,7 +161,7 @@ class AlarmFragment : Fragment() {
                 pendingIntent
         )
 
-        Toast.makeText(context, "Alarm is set", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "L'alarme est configurée", Toast.LENGTH_SHORT).show()
     }
 
     /**
@@ -147,8 +169,9 @@ class AlarmFragment : Fragment() {
      */
     class MyAlarm : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
-            Toast.makeText(context, "Alarm Bell RECEIVED", Toast.LENGTH_SHORT).show()
-            Log.d("Alarm Bell", "RECEIVED")
+            Toast.makeText(context, "L'alarme sonne", Toast.LENGTH_SHORT).show()
+            val vibrator: Vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            vibrator.vibrate(3000) // deprecated mais ça fonctionne
         }
     }
 }
