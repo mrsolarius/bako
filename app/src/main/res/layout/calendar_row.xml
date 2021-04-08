@@ -6,70 +6,27 @@
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:padding="10dp"
+            android:layout_height="wrap_content" android:padding="10dp"
             android:background="@drawable/layout_bg">
         <TextView
-                android:text="1er\nJan"
                 android:layout_width="40dp"
                 android:layout_height="match_parent" android:id="@+id/date_text"
-                android:textColor="#FFFFFF" android:textSize="18sp" android:textAlignment="center"/>
+                android:textColor="@color/textColor" android:textSize="18sp" android:textAlignment="center"/>
         <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#FFFFFF"/>
+                android:background="@color/textColor"/>
         <LinearLayout
-                android:id="@+id/real_work_layout"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:baselineAligned="false">
             <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" android:layout_weight="1"
-                    android:background="@drawable/layout_bg_deep_red"
-                    android:layout_margin="5dp" android:padding="5dp">
-                <TextView
-                        android:text="@string/re"
-                        android:id="@+id/real"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.1"
-                        android:rotation="270"
-                        android:padding="10dp"
-                        android:textColor="#FFFFFF"/>
-                <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#FFFFFF" android:layout_marginEnd="10dp"/>
-                <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:layout_weight="1">
-                    <TextView
-                            android:text="B1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/real_work_code"
-                            android:layout_weight="1"
-                            android:textSize="24sp"
-                            android:textColor="#FFFFFF"/>
-                    <TextView
-                            android:text="14h30 - 20h30"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/real_work_hours"
-                            android:layout_weight="1"
-                            android:textSize="8sp"
-                            android:textColor="#FFFFFF"/>
-                </LinearLayout>
-            </LinearLayout>
-            <LinearLayout
                     android:id="@+id/prev_work_layout"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" android:layout_weight="1"
+                    android:layout_height="wrap_content" android:layout_weight="1"
                     android:background="@drawable/layout_bg_deep_red"
-                    android:layout_margin="5dp" android:padding="5dp">
+                    android:layout_margin="5dp" android:padding="10dp">
                 <TextView
                         android:text="@string/pr"
                         android:id="@+id/prev"
@@ -101,6 +58,48 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/prev_work_hours"
+                            android:layout_weight="1"
+                            android:textSize="8sp"
+                            android:textColor="#FFFFFF"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                    android:id="@+id/real_work_layout"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:layout_weight="1"
+                    android:background="@drawable/layout_bg_deep_red"
+                    android:layout_margin="5dp" android:padding="10dp">
+                <TextView
+                        android:text="@string/re"
+                        android:id="@+id/real"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.1"
+                        android:rotation="270"
+                        android:padding="10dp"
+                        android:textColor="#FFFFFF"/>
+                <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#FFFFFF" android:layout_marginEnd="10dp"/>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:layout_weight="1">
+                    <TextView
+                            android:text="B1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/real_work_code"
+                            android:layout_weight="1"
+                            android:textSize="24sp"
+                            android:textColor="#FFFFFF"/>
+                    <TextView
+                            android:text="14h30 - 20h30"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/real_work_hours"
                             android:layout_weight="1"
                             android:textSize="8sp"
                             android:textColor="#FFFFFF"/>

@@ -1,4 +1,4 @@
-package app.bako.view.navigation.fragment.calendar
+package app.bako.view.navigation.fragment.calendar.plannig
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,15 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.bako.R
-import app.bako.model.workcode.WorkCodeViewModel
-import app.bako.model.workingday.WorkingDay
-import app.bako.model.workingday.WorkingDayDao
-import app.bako.model.workingday.WorkingDayRepository
 import app.bako.model.workingday.WorkingDayViewModel
-import app.bako.view.navigation.fragment.ManagerWorkCodeOfCalendarFragment
+import app.bako.view.navigation.fragment.calendar.ManagerWorkCodeOfCalendarFragment
 import kotlinx.android.synthetic.main.fragment_calendar.view.*
 
 /**
@@ -31,7 +26,7 @@ class CalendarFragment : Fragment() {
          * SETUP RECYCLER VIEW AND LOAD DATA
          */
         val view = inflater.inflate(R.layout.fragment_calendar, container, false)
-        val adapter = CalendarRecyclerAdapter()
+        val adapter = CalendarRecyclerAdapter(this)
         val recyclerView = view.calendarRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 

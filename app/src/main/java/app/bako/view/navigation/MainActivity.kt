@@ -9,7 +9,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.fragment.app.Fragment
 import app.bako.R
 import app.bako.view.navigation.fragment.AlarmFragment
-import app.bako.view.navigation.fragment.calendar.CalendarFragment
+import app.bako.view.navigation.fragment.calendar.plannig.CalendarFragment
 import app.bako.view.navigation.fragment.HomeFragment
 import app.bako.view.settings.SettingsActivity
 import kotlinx.android.synthetic.main.main_activity.*

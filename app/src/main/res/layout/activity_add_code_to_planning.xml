@@ -4,7 +4,7 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              tools:context=".view.navigation.fragment.AddCodeToPlanningFragment" android:orientation="vertical"
+              tools:context=".view.navigation.fragment.calendar.popup.AddCodeToPlanningFragment" android:orientation="vertical"
               android:padding="20dp">
 
 

@@ -8,7 +8,8 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/Theme.Bako">
+            android:theme="@style/Theme.Bako"
+            android:name=".Bako">
         <activity
                 android:name=".view.settings.SettingsActivity"
                 android:label="@string/title_activity_settings">
@@ -17,7 +18,7 @@
                 android:name=".view.settings.workcode.CodesListActivity"
                 android:label="@string/title_activity_settings">
         </activity>
-        <activity android:name=".view.navigation.fragment.AddCodeToPlanningFragment"></activity>
+        <activity android:name=".view.navigation.fragment.calendar.popup.AddCodeToPlanningFragment"></activity>
         <activity android:name=".view.navigation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

@@ -1,4 +1,4 @@
-package app.bako.view.navigation.fragment
+package app.bako.view.navigation.fragment.calendar.popup
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
@@ -6,7 +6,6 @@ import android.app.DatePickerDialog.OnDateSetListener
 import android.os.Bundle
 import android.view.*
 import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import app.bako.R

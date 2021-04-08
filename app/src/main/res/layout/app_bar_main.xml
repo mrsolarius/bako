@@ -2,9 +2,9 @@
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:orientation="vertical" android:padding="20dp">
+        android:orientation="vertical" android:padding="30dp">
 
     <Space
             android:layout_width="match_parent"
@@ -14,10 +14,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/textView4"
             android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-            android:textAllCaps="true"/>
+            android:textAllCaps="true" android:textColor="@color/white"/>
     <TextView
             android:text="@string/medical_planning"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/textView5"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" android:textColor="@color/white"/>
 </LinearLayout>
